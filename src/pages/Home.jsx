@@ -61,13 +61,13 @@ const Home = () => {
                                     <span>Jul 5th '22</span>
                                 </div>
                                 <h2><a href="/">The Apostles Continuation Church International (ACCI)</a></h2>
-                                <p className="mb-4 d-block">The Apostles Continuation Church International (ACCI) is a vibrant and dynamic community of believers dedicated to spreading the love and teachings of Jesus Christ. Founded in 2005, ACCI has grown from a small gathering of faithful individuals to a flourishing congregation with a mission to impact lives and transform communities</p>
+                                <p className="mb-4 d-block">The Apostles Continuation Church International (ACCI) is a vibrant and dynamic community of believers dedicated to spreading the love and teachings of Jesus Christ, ACCI has grown from a small gathering of faithful individuals to a flourishing congregation with a mission to impact lives and transform communities</p>
                                 <div className="d-flex align-items-center author">
                                     <div className="photo">
-                                        <img src="../../assets/img/person-1.jpg" alt="" className="img-fluid" />
+                                        <img src={pastor} alt="" className="img-fluid" />
                                     </div>
                                     <div className="name">
-                                        <h3 className="m-0 p-0">---</h3>
+                                        <h3 className="m-0 p-0">Apostle Clement Brakatu</h3>
                                     </div>
                                 </div>
                             </div>
