@@ -15,7 +15,7 @@ const HeaderComponent = () => {
                             <li className="dropdown"><a href="/user_login"><span>Account</span> <i className="bi bi-chevron-down dropdown-indicator"></i></a>
                                 <ul>
                                     <li className="dropdown"><a href="/user_login"><span>Get Started</span> <i className="bi bi-chevron-down dropdown-indicator"></i></a>
-                                        <ul>
+                                        <ul> 
                                             <li><a href="/user_login">Login</a></li>
                                             <li><a href="/user_register">Register</a></li>
                                             {/* <li><a href="/how_to">How To Join</a></li> */}
