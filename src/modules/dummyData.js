@@ -35,7 +35,7 @@ export const postData = [
         image: "https://example.com/images/fundraiser.jpg",
         date: "2024-05-01",
         author: "Mary Johnson"
-    }
+    },
 ]
 
 

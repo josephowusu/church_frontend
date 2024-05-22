@@ -1,4 +1,6 @@
 import React from 'react';
+// import Image from "./../backgroundImage.jpeg"
+import Image from "./../images/backgroundImage.jpeg"
 
 const HeroSlider = () => {
     return (
@@ -9,50 +11,24 @@ const HeroSlider = () => {
                         <div className="col-12">
                             <div className="swiper sliderFeaturedPosts">
                                 <div className="swiper-wrapper">
+
                                     <div className="swiper-slide">
-                                        <a href="#" className="img-bg d-flex align-items-end" style={{backgroundImage: `url('../../public/assets/img/assets/img/post-slide-1.jpg')`}}>
+                                        <a href="#" className="img-bg d-flex align-items-end" style={{ backgroundImage: `url(${Image})`  }}>
                                             <div className="img-bg-inner">
-                                                <h2>The Best Homemade Masks for Face (keep the Pimples Away)</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                                                <h2>Vision</h2>
+                                                <p>To spread the message of the Gospel to diverse cultures around the world, reaching as many people as Jesus Christ has instructed us to. Our mission includes establishing new churches in various communities, fostering environments where individuals can grow in their faith and come together in worship. Through these efforts, we aim to fulfill the Great Commission by sharing the love and teachings of Christ across different cultural landscapes, ensuring that His message is accessible to all. </p>
                                             </div>
                                         </a>
                                     </div>
 
-                                    <div className="swiper-slide">
-                                        <a href="#" className="img-bg d-flex align-items-end" style={{backgroundImage: `url('../../public/assets/img/assets/img/post-slide-1.jpg')`}}>
-                                            <div className="img-bg-inner">
-                                                <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div className="swiper-slide">
-                                        <a href="#" className="img-bg d-flex align-items-end" style={{backgroundImage: `url('../../public/assets/img/assets/img/post-slide-1.jpg')`}}>
-                                            <div className="img-bg-inner">
-                                                <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div className="swiper-slide">
-                                        <a href="#" className="img-bg d-flex align-items-end" style={{backgroundImage: `url('../../public/assets/img/assets/img/post-slide-1.jpg')`}}>
-                                            <div className="img-bg-inner">
-                                                <h2>9 Half-up/half-down Hairstyles for Long and Medium Hair</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
-                                            </div>
-                                        </a>
-                                    </div>
                                 </div>
-                                <div className="custom-swiper-button-next">
+                                {/* <div className="custom-swiper-button-next">
                                     <span className="bi-chevron-right"></span>
                                 </div>
                                 <div className="custom-swiper-button-prev">
                                     <span className="bi-chevron-left"></span>
                                 </div>
-
-                                <div className="swiper-pagination"></div>
+                                <div className="swiper-pagination"></div> */}
                             </div>
                         </div>
                     </div>
