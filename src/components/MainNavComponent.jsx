@@ -76,7 +76,7 @@ const MainNavComponent = () => {
                     <li class="nav-item">
                         <a class="nav-link" href="/calendar_event">
                             <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span class="menu-title">Tites & Offerings</span>
+                            <span class="menu-title">Tithes & Offerings</span>
                         </a>
                     </li>
                 </ul>

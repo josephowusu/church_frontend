@@ -127,11 +127,10 @@ const MainHeaderComponent = () => {
                             </li>
                         </ul>
                         <ul class="navbar-nav navbar-nav-right">
-                            <li class="nav-item nav-profile dropdown">
-                                <a class="nav-link" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                                    {/* <img src={avatar} alt="profile"/> */}
+                            <li class="nav-item nav-profile">
+                                <p class="nav-link">
                                     <span class="nav-profile-name">{name}</span>
-                                </a>
+                                </p>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link icon-link" onClick={logOut}>
