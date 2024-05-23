@@ -23,7 +23,7 @@ export const Router = {
         subPages: [
             {
                 name: 'markAttendance',
-                title: 'mark Attendance', 
+                title: 'Mark Attendance', 
                 href: '/mark_attendance',
                 icon: '',
                 subPages: []
@@ -37,13 +37,20 @@ export const Router = {
             }
         ]
     },
-    OPERATIONS: {
-        title: 'Report',
+    Message: {
+        title: 'Messages',
         subPages: [
             {
-                name: 'accountBalance',
-                title: 'Yiwala',
-                href: '/account-balance',
+                name: 'sms',
+                title: 'SMS', 
+                href: '/send_sms',
+                icon: '',
+                subPages: []
+            },
+            {
+                name: 'email',
+                title: 'Email', 
+                href: '/send_email',
                 icon: '',
                 subPages: []
             }

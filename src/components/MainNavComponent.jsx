@@ -61,6 +61,18 @@ const MainNavComponent = () => {
                         </a>
                     </li>
                     {renderNavigation()}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/department">
+                            <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span class="menu-title">Department</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calendar_event">
+                            <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span class="menu-title">Calendar & Events</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </>
