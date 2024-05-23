@@ -1,23 +1,23 @@
 export const Router = {
-    Members: {
-        title: 'Members',
-        subPages: [
-            {
-                name: 'memberTable',
-                title: 'Members Table',
-                href: '/member-table',
-                icon: '',
-                subPages: []
-            },
-            {
-                name: 'memberRegister',
-                title: 'Register Members',
-                href: '/register-member-form',
-                icon: '',
-                subPages: []
-            }
-        ]
-    },
+    // Members: {
+    //     title: 'Members',
+    //     subPages: [
+    //         {
+    //             name: 'memberTable',
+    //             title: 'Members Table',
+    //             href: '/member-table',
+    //             icon: '',
+    //             subPages: []
+    //         },
+    //         {
+    //             name: 'memberRegister',
+    //             title: 'Register Members',
+    //             href: '/register-member-form',
+    //             icon: '',
+    //             subPages: []
+    //         }
+    //     ]
+    // },
     Attendance: {
         title: 'Attendance',
         subPages: [
