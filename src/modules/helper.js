@@ -11,6 +11,12 @@ export const storeData = (key, data) => {
     }))
 }
 
+export const getFormattedDate = () => {
+    const date = new Date();
+    const options = { year: 'numeric', month: 'long', day: '2-digit' };
+    return date.toLocaleDateString('en-US', options);
+}
+
 
 export const fetchData = (key) => {
     let result = window.localStorage.getItem(key)

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { APIClient } from '../modules/helper'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const RegisterScreen = () => {
     const navigate = useNavigate()
@@ -14,22 +16,21 @@ const RegisterScreen = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         if (!firstName || !password || !lastName || !passwordC || !email) {
-            alert("required fields")
+            toast('Required fields', { position: "top-right" })
             return
         }
         if (password !== passwordC) {
-            alert("password doesnt match")
+            toast("password doesnt match", { position: "top-right" })
             return
         }
         APIClient.post('/register_user', {firstname: firstName, othername: otherName, lastname: lastName, password, email}).then((response) => {
-            alert(response.data.message)
             if (response.data.status === "success") {
-                alert(response.data.message) 
+                toast(response.data.message, { position: "top-right" })
                 setTimeout(() => {
                     navigate('/user_login')
-                }, 1500);
+                }, 1500)
             } else {
-                alert(response.message)
+                toast(response.data.message, { position: "top-right" })
             }
         })
     }
@@ -73,6 +74,7 @@ const RegisterScreen = () => {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </>
     )
 }

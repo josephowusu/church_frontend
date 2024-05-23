@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { APIClient } from '../modules/helper';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const ForgotPassword = () => {
     const navigate = useNavigate()
@@ -9,17 +11,17 @@ const ForgotPassword = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         if (!email) {
-            alert("required fields")
+            toast("required fields", { position: "top-right" })
             return
         }
         APIClient.post('/check_user_email', { email }).then((response) => {
             if (response.data.status === "success") {
-                alert(response.data.message) 
+                toast(response.data.message, { position: "top-right" })
                 setTimeout(() => {
                     navigate('/set_new_password')
                 }, 1500)
             } else {
-                alert(response.message)
+                toast(response.data.message, { position: "top-right" })
             }
         })
     }
@@ -34,7 +36,7 @@ const ForgotPassword = () => {
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>
-                        <div class="form mt-5 w-50">
+                        <div className="form mt-5 col-12 col-md-6">
                             <form action="#" method="post" role="form" class="php-email-form">
                                 <div class="row">
                                     <div class="form-group col-md-12">
@@ -47,6 +49,7 @@ const ForgotPassword = () => {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </>
     );
 }

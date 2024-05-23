@@ -8,6 +8,8 @@ import HowTo from './pages/HowTo';
 import Support from './pages/Support';
 import ChangePasswordScreen from './pages/ChangeUserPasswordScreen';
 import ForgotPassword from './pages/ForgotPassword';
+import DashboardContext from './context/DashboardContext';
+import Dashboard from './pages/main/Dashboard';
 
 function App() {
 	return (
@@ -20,6 +22,9 @@ function App() {
 					<Route path="/forgot_password" element={<ForgotPassword />} />
 					<Route path="/set_new_password" element={<ChangePasswordScreen />} />
 					<Route path="/support" element={<Support />} />
+				</Route>
+				<Route element={ <DashboardContext /> }>
+					<Route path="/dashboard" element={ <Dashboard /> } />
 				</Route>
 			</Routes>
 		</Router>

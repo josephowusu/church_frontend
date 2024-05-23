@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { APIClient } from '../modules/helper';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const ChangePasswordScreen = () => {
     const navigate = useNavigate()
@@ -10,22 +12,22 @@ const ChangePasswordScreen = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         if (!password || !passwordC) {
-            alert("required fields")
+            toast("required fields", { position: "top-right" })
             return
         }
         if (password !== passwordC) {
-            alert("passwords doesnt match")
+            toast("Passwords doesnt match", { position: "top-right" })
             return
         }
         APIClient.post('/change_user_password', {email: 'josephowusu027@proton.me', password: password}).then((response) => {
             console.log(response.data)
             if (response.data.status === "success") {
-                alert(response.data.message) 
+                toast(response.data.message, { position: "top-right" })
                 setTimeout(() => {
                     navigate('/user_login')
                 }, 1500)
             } else {
-                alert(response.message)
+                toast(response.data.message, { position: "top-right" })
             }
         })
     }
@@ -40,7 +42,7 @@ const ChangePasswordScreen = () => {
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>
-                        <div class="form mt-5 w-50">
+                        <div className="form mt-5 col-12 col-md-6">
                             <form action="#" method="post" role="form" class="php-email-form">
                                 <div class="row">
                                     <div class="form-group col-md-12">
@@ -56,6 +58,7 @@ const ChangePasswordScreen = () => {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </>
     );
 }

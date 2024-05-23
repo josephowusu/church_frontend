@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { APIClient, storeData } from '../modules/helper'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const LoginScreen = () => {
     const navigate = useNavigate()
@@ -10,18 +12,18 @@ const LoginScreen = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         if (!email || !password) {
-            alert("required fields")
+            toast('Required fields!', { position: "top-right" })
             return
         }
         APIClient.post('/login_user', {email, password}).then((response) => {
             if (response.data.status === "success") {
-                alert(response.data.message) 
+                toast(response.data.message, { position: "top-right" })
                 storeData('userData', response.data.data)
                 setTimeout(() => {
-                    navigate('/user_login')
+                    navigate('/dashboard')
                 }, 1500)
             } else {
-                alert(response.message)
+                alert('An error occured')
             }
         })
     }
@@ -53,6 +55,7 @@ const LoginScreen = () => {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </>
     )
 }
