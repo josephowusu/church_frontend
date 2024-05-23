@@ -37,7 +37,7 @@ const RegisterScreen = () => {
                                         <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)} required />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <input type="passwordC" name="passwordC" className="form-control" id="passwordC" placeholder="Confirm Password" onChange={(e)=> setPasswordC(e.target.value)} required />
+                                        <input type="password" name="passwordC" className="form-control" id="passwordC" placeholder="Confirm Password" onChange={(e)=> setPasswordC(e.target.value)} required />
                                     </div>
                                 </div>
                                 <div className="text-left"><button type="submit">Submit</button></div>
