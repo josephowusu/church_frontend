@@ -6,6 +6,8 @@ import LoginScreen from './pages/LoginScreen';
 import RegisterScreen from './pages/RegisterScreen';
 import HowTo from './pages/HowTo';
 import Support from './pages/Support';
+import ChangePasswordScreen from './pages/ChangeUserPasswordScreen';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
 	return (
@@ -15,7 +17,8 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route path="/user_login" element={<LoginScreen />} />
 					<Route path="/user_register" element={<RegisterScreen />} />
-					<Route path="/how_to" element={<HowTo />} />
+					<Route path="/forgot_password" element={<ForgotPassword />} />
+					<Route path="/set_new_password" element={<ChangePasswordScreen />} />
 					<Route path="/support" element={<Support />} />
 				</Route>
 			</Routes>
