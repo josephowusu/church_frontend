@@ -37,6 +37,32 @@ export const Router = {
             }
         ]
     },
+    TitesAndOfferings: {
+        title: 'Tites & Offerings',
+        subPages: [
+            {
+                name: 'dues',
+                title: 'Dues', 
+                href: '/dues',
+                icon: '',
+                subPages: []
+            },
+            {
+                name: 'tites',
+                title: 'Tites', 
+                href: '/tites',
+                icon: '',
+                subPages: []
+            },
+            {
+                name: 'specialOfferings',
+                title: 'Special Offerings', 
+                href: '/special_offerings',
+                icon: '',
+                subPages: []
+            }
+        ]
+    },
     Message: {
         title: 'Messages',
         subPages: [
