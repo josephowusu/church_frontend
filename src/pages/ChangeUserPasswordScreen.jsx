@@ -17,7 +17,7 @@ const ChangePasswordScreen = () => {
             alert("passwords doesnt match")
             return
         }
-        APIClient.post('/change_user_password', {email: 'hackmanling_official1@proton.me', password: password}).then((response) => {
+        APIClient.post('/change_user_password', {email: 'josephowusu027@proton.me', password: password}).then((response) => {
             console.log(response.data)
             if (response.data.status === "success") {
                 alert(response.data.message) 
