@@ -10,6 +10,9 @@ import ChangePasswordScreen from './pages/ChangeUserPasswordScreen';
 import ForgotPassword from './pages/ForgotPassword';
 import DashboardContext from './context/DashboardContext';
 import Dashboard from './pages/main/Dashboard';
+import SendSmS from './pages/main/SendSmS';
+import SendEmail from './pages/main/SendEmail';
+import Department from './pages/main/Department';
 
 function App() {
 	return (
@@ -23,8 +26,11 @@ function App() {
 					<Route path="/set_new_password" element={<ChangePasswordScreen />} />
 					<Route path="/support" element={<Support />} />
 				</Route>
-				<Route element={ <DashboardContext /> }>
-					<Route path="/dashboard" element={ <Dashboard /> } />
+				<Route element={<DashboardContext /> }>
+					<Route path="/dashboard" element={<Dashboard /> } />
+					<Route path="/send_sms" element={<SendSmS /> } />
+					<Route path="/send_email" element={<SendEmail /> } />
+					<Route path="/department" element={<Department /> } />
 				</Route>
 			</Routes>
 		</Router>
