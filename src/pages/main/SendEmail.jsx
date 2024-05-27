@@ -6,19 +6,18 @@ const SendEmail = () => {
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/insert-update-department',
+		endPoint: '/send_mail',
 		formData: [
 			{ label: 'Subject', type: 'text', name: 'subject', colSize: 4 },
 			{ label: 'Message', type: 'text', name: 'message', colSize: 8 },
-			{ label: 'To', type: 'textfield', name: 'To', colSize: 4 },
-			{title:'Departments',label: 'Department', type: 'select', name: 'department', colSize: 8,
-				options:[
-					{value:'choir',label:'Choir'},
-					{value:'Mens Department',label:'Mens Department'},
-					{value:'Womens Department',label:'Womens Department'},
-				]
-			 }
-
+			{ label: 'Email list', type: 'textarea', name: 'mails', colSize: 12 },
+			// {title:'Departments', label: 'Department', type: 'select', name: 'department', colSize: 8,
+			// 	options:[
+			// 		{value:'choir',label:'Choir'},
+			// 		{value:'Mens Department',label:'Mens Department'},
+			// 		{value:'Womens Department',label:'Womens Department'},
+			// 	]
+			// }
 		]
 	}
 	

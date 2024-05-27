@@ -119,6 +119,13 @@ function CustomFormComponent({formData}) {
                                     <h3>{field.title} </h3>
                                 </div>
                             )}
+                            {field.type === "textarea" && (
+                                <div key={index} controlId={field.name} className={`form-group col-${field.colSize} mt-1`}>
+                                    <label style={{ fontSize: 12 }}>{field.label} {field.required ? '*' : ''}</label>
+                                    <textarea key={index} className='form-control' placeholder={field.label} required={field.required}>   
+                                    </textarea>
+                                </div>
+                            )}
                             {field.type === "text" || field.type === "tel" || field.type === "email" || field.type === "number" ? (
                                 <div key={index} controlId={field.name} className={`form-group col-${field.colSize} mt-1`}>
                                     <label style={{ fontSize: 12 }}>{field.label} {field.required ? '*' : ''}</label>
