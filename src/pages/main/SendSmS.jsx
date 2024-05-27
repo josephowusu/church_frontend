@@ -8,8 +8,16 @@ const SendSmS = () => {
 		id: generateIdentifier(),
 		endPoint: '/insert-update-department',
 		formData: [
-			{ label: 'Name', type: 'text', name: 'name', colSize: 4 },
-			{ label: 'Description', type: 'text', name: 'description', colSize: 8 },
+			{ label: 'Message', type: 'text', name: 'message', colSize: 12 },
+			{ label: 'To', type: 'text', name: 'To', colSize: 4 },
+			{title:'Departments',label: 'Department', type: 'select', name: 'department', colSize: 8,
+				options:[
+					{value:'choir',label:'Choir'},
+					{value:'Mens Department',label:'Mens Department'},
+					{value:'Womens Department',label:'Womens Department'},
+				]
+			 }
+
 		]
 	}
 	
