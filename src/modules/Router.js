@@ -50,14 +50,14 @@ export const Router = {
             {
                 name: 'tites',
                 title: 'Tites', 
-                href: '/tites',
+                href: '/tithes',
                 icon: '',
                 subPages: []
             },
             {
                 name: 'specialOfferings',
                 title: 'Special Offerings', 
-                href: '/special_offerings',
+                href: '/offerings',
                 icon: '',
                 subPages: []
             }

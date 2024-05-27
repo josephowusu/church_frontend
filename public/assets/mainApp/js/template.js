@@ -15,23 +15,29 @@
     function addActiveClass(element) {
       if (current === "") {
         //for root url
-        if (element.attr('href').indexOf("index.html") !== -1) {
-          element.parents('.nav-item').last().addClass('active');
-          if (element.parents('.sub-menu').length) {
-            element.closest('.collapse').addClass('show');
-            element.addClass('active');
+        if (element) {
+
+          if (element.attr('href').indexOf("index.html") !== -1) {
+            element.parents('.nav-item').last().addClass('active');
+            if (element.parents('.sub-menu').length) {
+              element.closest('.collapse').addClass('show');
+              element.addClass('active');
+            }
           }
         }
       } else {
         //for other url
-        if (element.attr('href').indexOf(current) !== -1) {
-          element.parents('.nav-item').last().addClass('active');
-          if (element.parents('.sub-menu').length) {
-            element.closest('.collapse').addClass('show');
-            element.addClass('active');
-          }
-          if (element.parents('.submenu-item').length) {
-            element.addClass('active');
+        if (element.attr('href')) {
+
+          if (element.attr('href').indexOf(current) !== -1) {
+            element.parents('.nav-item').last().addClass('active');
+            if (element.parents('.sub-menu').length) {
+              element.closest('.collapse').addClass('show');
+              element.addClass('active');
+            }
+            if (element.parents('.submenu-item').length) {
+              element.addClass('active');
+            }
           }
         }
       }
@@ -90,7 +96,8 @@
       spicabanner && spicabanner.classList.add('d-flex');
     }
     else {
-      document.querySelector('#proBanner').classList.add('d-none');
+      let ban = document.querySelector('#proBanner')
+      ban && ban.classList.add('d-none');
     }
     let closebasnner = document.querySelector('#bannerClose')
     closebasnner && closebasnner.addEventListener('click',function() {

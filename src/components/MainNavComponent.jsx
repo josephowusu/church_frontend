@@ -54,7 +54,7 @@ const MainNavComponent = () => {
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">
+                        <a class="nav-link" onClick={() => navigate('/dashboard')}>
                             <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
                             <span class="menu-title">Dashboard</span>
                             {/* <div class="badge badge-info badge-pill">2</div> */}
@@ -62,21 +62,21 @@ const MainNavComponent = () => {
                     </li>
                     {renderNavigation()}
                     <li class="nav-item">
-                        <a class="nav-link" href="/department">
+                        <a class="nav-link" onClick={() => navigate('/department')}>
                             <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
                             <span class="menu-title">Departments</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/calendar_event">
+                        <a class="nav-link" onClick={() => navigate('/calendar_event')}>
                             <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
                             <span class="menu-title">Calendar & Events</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/calendar_event">
+                        <a class="nav-link" onClick={() => navigate('/organisation')}>
                             <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span class="menu-title">Tithes & Offerings</span>
+                            <span class="menu-title">Organisaiton</span>
                         </a>
                     </li>
                 </ul>

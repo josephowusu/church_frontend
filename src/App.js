@@ -13,6 +13,11 @@ import Dashboard from './pages/main/Dashboard';
 import SendSmS from './pages/main/SendSmS';
 import SendEmail from './pages/main/SendEmail';
 import Department from './pages/main/Department';
+import CalenderAndEvent from './pages/main/CalenderAndEvent';
+import Organisation from './pages/main/Organisation';
+import Tithes from './pages/main/Tithes';
+import Offerings from './pages/main/Offerings';
+import Dues from './pages/main/Dues';
 
 function App() {
 	return (
@@ -31,6 +36,11 @@ function App() {
 					<Route path="/send_sms" element={<SendSmS /> } />
 					<Route path="/send_email" element={<SendEmail /> } />
 					<Route path="/department" element={<Department /> } />
+					<Route path="/calendar_event" element={<CalenderAndEvent /> } />
+					<Route path="/organisation" element={<Organisation /> } />
+					<Route path="/tithes" element={<Tithes /> } />
+					<Route path="/offerings" element={<Offerings /> } />
+					<Route path="/dues" element={<Dues /> } />
 				</Route>
 			</Routes>
 		</Router>

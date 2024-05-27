@@ -1,15 +1,16 @@
+
 import React, { useState } from 'react';
 import { generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
-const Department = () => {
+const CalenderAndEvent = () => {
 
 	const formData = {
 		id: generateIdentifier(),
 		endPoint: '/insert-update-department',
 		formData: [
-			{ label: 'Name', type: 'text', name: 'name', colSize: 4 },
-			{ label: 'Description', type: 'text', name: 'description', colSize: 8 },
+			{ label: 'Event Name', type: 'text', name: 'name', colSize: 6 }, { label: 'Location', type: 'text', name: 'location', colSize: 6 },
+			{ label: 'Description', type: 'text', name: 'description', colSize: 12 },
 		]
 	}
 	
@@ -20,7 +21,7 @@ const Department = () => {
             	<div class="col-lg-12 grid-margin stretch-card">
               		<div class="card">
 						<div class="card-body">
-							<h4 class="card-title">DEPARTMENTS</h4>
+							<h4 class="card-title">CALENDAR AND EVENTS</h4>
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<thead>
@@ -32,19 +33,25 @@ const Department = () => {
 												DESCRIPTION
 											</th>
 											<th>
-												STATUS
+												LOCATION
+											</th>
+                                            <th>
+												DETAILS
 											</th>
 										</tr>
                       				</thead>
                       				<tbody>
 										<tr>
 											<td>
-												Womens' Fellowship
+												Wedding
 											</td>
 											<td>
-												All Mbaaku
+												Our Pastor ohNana weds our beautiful Maame Grace brakatu
 											</td>
 											<td>
+												GOD IS LOVE CHOPBAR
+											</td>
+                                            <td>
 												DETAILS
 											</td>
 										</tr>
@@ -59,4 +66,5 @@ const Department = () => {
     );
 }
 
-export default Department;
+export default CalenderAndEvent;
+

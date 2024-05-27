@@ -16,13 +16,15 @@ const Dashboard = () => {
                             Full name
                           </th>
                           <th>
+                            Gender
+                          </th>
+                          <th>
                             Phone
+                          </th><th>
+                            Dues
                           </th>
                           <th>
-                            Amount
-                          </th>
-                          <th>
-                            Date
+                            Date Joined
                           </th>
                         </tr>
                       </thead>
@@ -32,10 +34,13 @@ const Dashboard = () => {
                             Herman Beck
                           </td>
                           <td>
+                            Male
+                          </td>
+                          <td>
                             0592382938
                           </td>
                           <td>
-                            GHS 77.99
+                            GHS2000.00
                           </td>
                           <td>
                             May 15, 2024

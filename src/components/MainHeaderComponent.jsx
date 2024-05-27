@@ -27,18 +27,15 @@ const MainHeaderComponent = () => {
         GetData()
     }, [])
 
-
     return (
         <>
             <nav class="navbarmain col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                        {/* <span class="mdi mdi-menu"></span> */}
-                        {/* <i class="fa fa-bars" aria-hidden="true"></i> */}
                         <i class="fa fa-bars" aria-hidden="true"></i>
                     </button>
                     <div class="navbar-brand-wrapper">
-                        <a class="navbar-brand brand-logo" href="/dashboard"><img src={logo} alt="logo" style={{height: 65, borderRadius: '100%'}}/></a>
+                        <a class="navbar-brand brand-logo" href="/dashboard"><img src={logo} alt="logo" style={{height: 50, borderRadius: '100%'}}/></a>
                         <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src={logo} alt="logo" style={{height: 20, width: 20}}/></a>
                     </div>
                     <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, {name}</h4>
@@ -48,7 +45,6 @@ const MainHeaderComponent = () => {
                             </li>
                             <li class="nav-item dropdown me-1">
                                 <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
-                                    {/* <i class="mdi mdi-calendar mx-0"></i> */}
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                     <span class="count bg-info">2</span>
                                 </a>
@@ -115,7 +111,8 @@ const MainHeaderComponent = () => {
                             </li>
                         </ul>
                         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                            <span class="mdi mdi-menu"></span>
+                            {/* <span class="mdi mdi-menu"></span>*/}
+                            <i class="fa fa-bars" aria-hidden="true"></i> 
                         </button>
                     </div>
                     <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">

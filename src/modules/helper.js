@@ -1,5 +1,6 @@
 import axios from "axios"
 import { api_url } from "./credentials"
+import { io } from 'socket.io-client'
 // import file from './config.json'
 
 
@@ -15,6 +16,27 @@ export const getFormattedDate = () => {
     const date = new Date();
     const options = { year: 'numeric', month: 'long', day: '2-digit' };
     return date.toLocaleDateString('en-US', options);
+}
+
+function generateUUID() {
+    const hexDigits = '0123456789abcdef';
+    let uuid = '';
+    for (let i = 0; i < 36; i++) {
+      if (i === 8 || i === 13 || i === 18 || i === 23) {
+        uuid += '-';
+      } else if (i === 14) {
+        uuid += '4';
+      } else if (i === 19) {
+        uuid += hexDigits.substr(Math.floor(Math.random() * 4), 1) + '8';
+      } else {
+        uuid += hexDigits.substr(Math.floor(Math.random() * 16), 1);
+      }
+    }
+    return uuid;
+}
+
+export const generateIdentifier = () => {
+    return generateUUID()
 }
 
 
@@ -52,3 +74,5 @@ export const clearStorage = () => {
 export function formatCurrency(amount, locale = 'en-US') {
     return new Intl.NumberFormat(locale, { minimumFractionDigits: 2 }).format(amount);
 }
+
+export const SocketIO = io(api_url)

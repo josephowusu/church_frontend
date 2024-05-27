@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
-const Department = () => {
+const Tithes = () => {
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/insert-update-department',
+		endPoint: '/insert-tithes',
 		formData: [
-			{ label: 'Name', type: 'text', name: 'name', colSize: 4 },
-			{ label: 'Description', type: 'text', name: 'description', colSize: 8 },
+			{ label: 'Date (YYYY-MM-DD)', type: 'text', name: 'date', colSize: 6 },
+			{ label: 'Amount', type: 'number', name: 'amount', colSize: 6 },
 		]
 	}
 	
@@ -20,29 +20,29 @@ const Department = () => {
             	<div class="col-lg-12 grid-margin stretch-card">
               		<div class="card">
 						<div class="card-body">
-							<h4 class="card-title">DEPARTMENTS</h4>
+							<h4 class="card-title">TITHES</h4>
 							<div class="table-responsive">
 								<table class="table table-striped">
 									<thead>
 										<tr>
 											<th>
-												NAME
+												DATE
 											</th>
 											<th>
-												DESCRIPTION
+												AMOUNT
 											</th>
 											<th>
-												STATUS
+												CHECK
 											</th>
 										</tr>
                       				</thead>
                       				<tbody>
 										<tr>
 											<td>
-												Womens' Fellowship
+												MAY 26, 2024
 											</td>
 											<td>
-												All Mbaaku
+												GHS70,000.00
 											</td>
 											<td>
 												DETAILS
@@ -59,4 +59,4 @@ const Department = () => {
     );
 }
 
-export default Department;
+export default Tithes;
