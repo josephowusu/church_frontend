@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { generateIdentifier } from '../../modules/helper';
+import React, { useEffect, useState } from 'react';
+import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
 const Department = () => {
+	const [records, setRecords] = useState([])
 
 	const formData = {
 		id: generateIdentifier(),
@@ -12,6 +13,19 @@ const Department = () => {
 			{ label: 'Description', type: 'text', name: 'description', colSize: 8 },
 		]
 	}
+
+	const fetchRecords = () => {
+		const sessionData = fetchData('sessionData')
+		SocketIO.emit('/fetch-department', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setRecords(response.data)
+			}
+		})
+	}
+
+	useEffect(()=> {
+		fetchRecords()
+	}, [])
 	
     return (
         <>
@@ -37,17 +51,21 @@ const Department = () => {
 										</tr>
                       				</thead>
                       				<tbody>
-										<tr>
-											<td>
-												Womens' Fellowship
-											</td>
-											<td>
-												All Mbaaku
-											</td>
-											<td>
-												DETAILS
-											</td>
-										</tr>
+										{records && records.length > 0 ? records.map((record) => {
+											return (
+												<tr>
+													<td>
+														{record.name}
+													</td>
+													<td>
+														{record.description}
+													</td>
+													<td>
+														{record.status}
+													</td>
+												</tr>
+											)
+										}) : null}
                       				</tbody>
 								</table>
 							</div>

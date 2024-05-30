@@ -76,7 +76,7 @@ const MainNavComponent = () => {
                     <li class="nav-item">
                         <a class="nav-link" onClick={() => navigate('/organisation')}>
                             <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span class="menu-title">Organisaiton</span>
+                            <span class="menu-title">Organisation</span>
                         </a>
                     </li>
                 </ul>

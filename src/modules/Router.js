@@ -38,7 +38,7 @@ export const Router = {
         ]
     },
     TitesAndOfferings: {
-        title: 'Tites & Offerings',
+        title: 'Tithes & Offerings',
         subPages: [
             {
                 name: 'dues',
@@ -48,15 +48,15 @@ export const Router = {
                 subPages: []
             },
             {
-                name: 'tites',
-                title: 'Tites', 
+                name: 'tithes',
+                title: 'Tithes', 
                 href: '/tithes',
                 icon: '',
                 subPages: []
             },
             {
-                name: 'specialOfferings',
-                title: 'Special Offerings', 
+                name: 'offerings',
+                title: 'Offerings', 
                 href: '/offerings',
                 icon: '',
                 subPages: []

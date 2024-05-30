@@ -10,14 +10,7 @@ const SendEmail = () => {
 		formData: [
 			{ label: 'Subject', type: 'text', name: 'subject', colSize: 4 },
 			{ label: 'Message', type: 'text', name: 'message', colSize: 8 },
-			{ label: 'Email list', type: 'textarea', name: 'mails', colSize: 12 },
-			// {title:'Departments', label: 'Department', type: 'select', name: 'department', colSize: 8,
-			// 	options:[
-			// 		{value:'choir',label:'Choir'},
-			// 		{value:'Mens Department',label:'Mens Department'},
-			// 		{value:'Womens Department',label:'Womens Department'},
-			// 	]
-			// }
+			{ label: 'Email list', type: 'textarea', name: 'mails', colSize: 12 }
 		]
 	}
 	
@@ -34,26 +27,38 @@ const SendEmail = () => {
 									<thead>
 										<tr>
 											<th>
-												Name
+												DATE
 											</th>
 											<th>
-												Description
+												SUBJECT
 											</th>
 											<th>
-												Status
+												MESSAGE
+											</th>
+											<th>
+												STATUS
+											</th>
+											<th>
+												CHECK
 											</th>
 										</tr>
                       				</thead>
                       				<tbody>
 										<tr>
 											<td>
-												Womens' Fellowship
+												2024-05-23
 											</td>
 											<td>
-												All Mbaaku
+												Helo
 											</td>
 											<td>
-												Live
+												All Mbaaku assembly
+											</td>
+											<td>
+												sent 1, failed 2
+											</td>
+											<td>
+												DETAIL
 											</td>
 										</tr>
                       				</tbody>
@@ -64,7 +69,7 @@ const SendEmail = () => {
 				</div>
           </div>
         </>
-    );
+    )
 }
 
 export default SendEmail;
