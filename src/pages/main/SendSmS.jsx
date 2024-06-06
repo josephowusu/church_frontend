@@ -1,41 +1,49 @@
-import React, { useState } from 'react';
-import { generateIdentifier } from '../../modules/helper';
+import React, { useEffect, useState } from 'react';
+import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
 const SendSmS = () => {
+	const [records, setRecords] = useState([])
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/insert-update-department',
+		endPoint: '/send-sms',
 		formData: [
-			{ label: 'Message', type: 'text', name: 'message', colSize: 12 },
-			{ label: 'To', type: 'text', name: 'To', colSize: 4 },
-			{title:'Departments',label: 'Department', type: 'select', name: 'department', colSize: 8,
-				options:[
-					{value:'choir',label:'Choir'},
-					{value:'Mens Department',label:'Mens Department'},
-					{value:'Womens Department',label:'Womens Department'},
-				]
-			 }
-
+			{ label: 'Department', type: 'fetchList', name: 'departmentID', fetchEndPoint: '/fetch-department', display: ['name'], colSize: 4 },
+			{ label: 'Message', type: 'text', name: 'message', colSize: 8 }
 		]
 	}
+
+	const fetchRecords = () => {
+		const sessionData = fetchData('sessionData')
+		console.log(sessionData)
+		SocketIO.emit('/fetch-dues', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setRecords(response.data)
+				console.log(response.data)
+			}
+		})
+	}
+
+	useEffect(()=> {
+		fetchRecords()
+		SocketIO.on('/dues/broadcast', () => {
+			fetchRecords()
+		})
+	}, [])
 	
     return (
         <>
 			<CustomFormComponent formData={formData} />
-			<div class="row">
-            	<div class="col-lg-12 grid-margin stretch-card">
-              		<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">SEND SMS</h4>
-							<div class="table-responsive">
-								<table class="table table-striped">
+			<div className="row">
+            	<div className="col-lg-12 grid-margin stretch-card">
+              		<div className="card">
+						<div className="card-body">
+							<h4 className="card-title">SEND SMS</h4>
+							<div className="table-responsive">
+								<table className="table table-striped">
 									<thead>
 										<tr>
-											<th>
-												SUBJECT
-											</th>
 											<th>
 												MESSAGE
 											</th>
@@ -45,18 +53,18 @@ const SendSmS = () => {
 										</tr>
                       				</thead>
                       				<tbody>
-										<tr>
-											<td>
-												Womens' Fellowship
-											</td>
-											<td>
-												All Mbaaku
-											</td>
-											<td>
-												SENT
-											</td>
-										</tr>
-										
+									  {records && records.length > 0 ? records.map((record) => {
+											return (
+												<tr>
+													<td>
+														{record.message}
+													</td>
+													<td>
+														{record.status}
+													</td>
+												</tr>
+											)
+										}) : null}
                       				</tbody>
 								</table>
 							</div>

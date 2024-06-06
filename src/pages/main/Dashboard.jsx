@@ -1,54 +1,84 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { SocketIO, fetchData, fullDate } from '../../modules/helper';
 
 const Dashboard = () => {
+	const [records, setRecords] = useState([])
+
+  	const fetchRecords = () => {
+		const sessionData = fetchData('sessionData')
+		SocketIO.emit('/fetch-members-details', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setRecords(response.data)
+			}
+		})
+	}
+
+	useEffect(()=> {
+		fetchRecords()
+		SocketIO.on('/member/broadcast', () => {
+			fetchRecords()
+		})
+	}, [])
+
     return (
         <>
-            <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Members Financial management review</h4>
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            Full name
-                          </th>
-                          <th>
-                            Gender
-                          </th>
-                          <th>
-                            Phone
-                          </th><th>
-                            Dues
-                          </th>
-                          <th>
-                            Date Joined
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            Male
-                          </td>
-                          <td>
-                            0592382938
-                          </td>
-                          <td>
-                            GHS2000.00
-                          </td>
-                          <td>
-                            May 15, 2024
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+            <div className="row">
+            	<div className="col-lg-12 grid-margin stretch-card">
+              		<div className="card">
+                		<div className="card-body">
+                  			<h4 className="card-title">Members Financial management review</h4>
+                  			<div className="table-responsive">
+                    			<table className="table table-striped">
+                      				<thead>
+										<tr>
+											<th>
+												FULL NAME
+											</th>
+											<th>
+												ACCOUNT TYPE
+											</th>
+											<th>
+												PHONE
+											</th>
+											<th>
+												DUES
+											</th>
+											<th>
+												TITHES
+											</th>
+											<th>
+												CHECK
+											</th>
+										</tr>
+									</thead>
+								<tbody>
+								{records && records.length > 0 ? records.map((record) => {
+									return (
+										<tr>
+											<td>
+												{record.firstName} {record.otherName ? record.otherName : ''} {record.lastName}
+											</td>
+											<td>
+												{record.type}
+											</td>
+											<td>
+												{record.phone ? record.phone : ''}
+											</td>
+											<td>
+												40
+											</td>
+											<td>
+												600
+											</td>
+											<td>
+												DETAILS
+											</td>
+										</tr>
+									)
+								}) : null}
+							</tbody>
+						</table>
+					</div>
                 </div>
               </div>
             </div>

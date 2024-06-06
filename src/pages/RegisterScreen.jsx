@@ -11,11 +11,12 @@ const RegisterScreen = () => {
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
     const [passwordC, setPasswordC] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault()
-        if (!firstName || !password || !lastName || !passwordC || !email) {
+        if (!firstName || !password || !lastName || !passwordC || !email || !phone) {
             toast('Required fields', { position: "top-right" })
             return
         }
@@ -23,7 +24,7 @@ const RegisterScreen = () => {
             toast("password doesnt match", { position: "top-right" })
             return
         }
-        APIClient.post('/register_user', {firstname: firstName, othername: otherName, lastname: lastName, password, email}).then((response) => {
+        APIClient.post('/register_user', {firstname: firstName, othername: otherName, lastname: lastName, password, email, phone}).then((response) => {
             if (response.data.status === "success") {
                 toast(response.data.message, { position: "top-right" })
                 setTimeout(() => {
@@ -57,6 +58,9 @@ const RegisterScreen = () => {
                                     </div>
                                     <div className="form-group col-12 col-md-4">
                                         <input type="text" name="lastName" className="form-control" id="lastName" placeholder="Last Name" onChange={(e)=> setLastName(e.target.value)} required />
+                                    </div>
+                                    <div className="form-group col-12 col-md-12">
+                                        <input type="tel" name="phone" className="form-control" id="phone" placeholder="Phone Number" onChange={(e)=> setPhone(e.target.value)} required />
                                     </div>
                                     <div className="form-group col-12 col-md-12">
                                         <input type="email" name="email" className="form-control" id="email" placeholder="Email" onChange={(e)=> setEmail(e.target.value)} required />

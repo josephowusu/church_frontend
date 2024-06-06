@@ -29,80 +29,80 @@ const MainHeaderComponent = () => {
 
     return (
         <>
-            <nav class="navbarmain col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
-                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
+            <nav className="navbarmain col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
+                <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                    <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <i className="fa fa-bars" aria-hidden="true"></i>
                     </button>
-                    <div class="navbar-brand-wrapper">
-                        <a class="navbar-brand brand-logo" href="/dashboard"><img src={logo} alt="logo" style={{height: 50, borderRadius: '100%'}}/></a>
-                        <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src={logo} alt="logo" style={{height: 20, width: 20}}/></a>
+                    <div className="navbar-brand-wrapper">
+                        <a className="navbar-brand brand-logo" href="/dashboard"><img src={logo} alt="logo" style={{height: 50, borderRadius: '100%'}}/></a>
+                        <a className="navbar-brand brand-logo-mini" href="/dashboard"><img src={logo} alt="logo" style={{height: 20, width: 20}}/></a>
                     </div>
-                    <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, {name}</h4>
-                        <ul class="navbar-nav navbar-nav-right">
-                            <li class="nav-item">
-                                <h4 class="mb-0 font-weight-bold d-none d-xl-block">Date: {getFormattedDate()}</h4>
+                    <h4 className="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, {name}</h4>
+                        <ul className="navbar-nav navbar-nav-right">
+                            <li className="nav-item">
+                                <h4 className="mb-0 font-weight-bold d-none d-xl-block">Date: {getFormattedDate()}</h4>
                             </li>
-                            <li class="nav-item dropdown me-1">
-                                <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <span class="count bg-info">2</span>
+                            <li className="nav-item dropdown me-1">
+                                <a className="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
+                                    <i className="fa fa-calendar" aria-hidden="true"></i>
+                                    <span className="count bg-info">2</span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                                    <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <img src={logo} alt="image" class="profile-pic" />
+                                <div className="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                    <p className="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+                                    <a className="dropdown-item preview-item">
+                                        <div className="preview-thumbnail">
+                                            <img src={logo} alt="image" className="profile-pic" />
                                         </div>
-                                        <div class="preview-item-content flex-grow">
-                                            <h6 class="preview-subject ellipsis font-weight-normal">David Grey</h6>
-                                            <p class="font-weight-light small-text text-muted mb-0">
+                                        <div className="preview-item-content flex-grow">
+                                            <h6 className="preview-subject ellipsis font-weight-normal">David Grey</h6>
+                                            <p className="font-weight-light small-text text-muted mb-0">
                                                 The meeting is cancelled
                                             </p>
                                         </div>
                                     </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <img src="images/faces/face2.jpg" alt="image" class="profile-pic" />
+                                    <a className="dropdown-item preview-item">
+                                        <div className="preview-thumbnail">
+                                            <img src="images/faces/face2.jpg" alt="image" className="profile-pic" />
                                         </div>
-                                        <div class="preview-item-content flex-grow">
-                                            <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
+                                        <div className="preview-item-content flex-grow">
+                                            <h6 className="preview-subject ellipsis font-weight-normal">Tim Cook
                                             </h6>
-                                            <p class="font-weight-light small-text text-muted mb-0">
+                                            <p className="font-weight-light small-text text-muted mb-0">
                                                 New product launch
                                             </p>
                                         </div>
                                     </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <img src="images/faces/face3.jpg" alt="image" class="profile-pic" />
+                                    <a className="dropdown-item preview-item">
+                                        <div className="preview-thumbnail">
+                                            <img src="images/faces/face3.jpg" alt="image" className="profile-pic" />
                                         </div>
-                                        <div class="preview-item-content flex-grow">
-                                            <h6 class="preview-subject ellipsis font-weight-normal"> Johnson</h6>
-                                            <p class="font-weight-light small-text text-muted mb-0">
+                                        <div className="preview-item-content flex-grow">
+                                            <h6 className="preview-subject ellipsis font-weight-normal"> Johnson</h6>
+                                            <p className="font-weight-light small-text text-muted mb-0">
                                                 Upcoming board meeting
                                             </p>
                                         </div>
                                     </a>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown me-2">
-                                <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                                    {/* <i class="mdi mdi-email-open mx-0"></i> */}
-                                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    <span class="count bg-danger">1</span>
+                            <li className="nav-item dropdown me-2">
+                                <a className="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                                    {/* <i className="mdi mdi-email-open mx-0"></i> */}
+                                    <i className="fa fa-envelope" aria-hidden="true"></i>
+                                    <span className="count bg-danger">1</span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                                    <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-info">
-                                                <i class="mdi mdi-account-box mx-0"></i>
+                                <div className="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                                    <p className="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                                    <a className="dropdown-item preview-item">
+                                        <div className="preview-thumbnail">
+                                            <div className="preview-icon bg-info">
+                                                <i className="mdi mdi-account-box mx-0"></i>
                                             </div>
                                         </div>
-                                        <div class="preview-item-content">
-                                            <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                            <p class="font-weight-light small-text mb-0 text-muted">
+                                        <div className="preview-item-content">
+                                            <h6 className="preview-subject font-weight-normal">New user registration</h6>
+                                            <p className="font-weight-light small-text mb-0 text-muted">
                                                 2 days ago
                                             </p>
                                         </div>
@@ -110,28 +110,28 @@ const MainHeaderComponent = () => {
                                 </div>
                             </li>
                         </ul>
-                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                            {/* <span class="mdi mdi-menu"></span>*/}
-                            <i class="fa fa-bars" aria-hidden="true"></i> 
+                        <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                            {/* <span className="mdi mdi-menu"></span>*/}
+                            <i className="fa fa-bars" aria-hidden="true"></i> 
                         </button>
                     </div>
-                    <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
-                        <ul class="navbar-nav mr-lg-2">
-                            <li class="nav-item nav-search d-none d-lg-block">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search" />
+                    <div className="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
+                        <ul className="navbar-nav mr-lg-2">
+                            <li className="nav-item nav-search d-none d-lg-block">
+                                <div className="input-group">
+                                    <input type="text" className="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search" />
                                 </div>
                             </li>
                         </ul>
-                        <ul class="navbar-nav navbar-nav-right">
-                            <li class="nav-item nav-profile">
-                                <p class="nav-link">
-                                    <span class="nav-profile-name">{name}</span>
+                        <ul className="navbar-nav navbar-nav-right">
+                            <li className="nav-item nav-profile">
+                                <p className="nav-link">
+                                    <span className="nav-profile-name">{name}</span>
                                 </p>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link icon-link" onClick={logOut}>
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <li className="nav-item">
+                                <a href="#" className="nav-link icon-link" onClick={logOut}>
+                                    <i className="fa fa-sign-out" aria-hidden="true"></i>
                                 </a>
                             </li>
                         </ul>

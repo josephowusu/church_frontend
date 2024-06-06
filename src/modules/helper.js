@@ -76,3 +76,29 @@ export function formatCurrency(amount, locale = 'en-US') {
 }
 
 export const SocketIO = io(api_url)
+
+export const fullDate = (value) => {
+    let date
+    if (value) {
+        date = new Date(value)
+    } else {
+        date = new Date()
+    }
+
+    let dd = date.getUTCDate()
+    dd = dd < 10 ? '0'+dd : dd
+
+    let mm = date.getUTCMonth()+1
+    mm = mm < 10 ? '0'+mm : mm
+
+    let yyyy = date.getUTCFullYear()
+
+    return yyyy+'-'+mm+'-'+dd
+}
+
+export function shortenText(text, maxLength) {
+    if (text.length <= maxLength) {
+        return text
+    }
+    return text.substring(0, maxLength - 3) + '...'
+}

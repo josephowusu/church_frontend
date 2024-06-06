@@ -1,30 +1,45 @@
-import React, { useState } from 'react';
-import { generateIdentifier } from '../../modules/helper';
+import React, { useEffect, useState } from 'react';
+import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
 const Organisation = () => {
-	const [oldData, setOldData] = useState({})
+	const [records, setRecords] = useState([])
 
 	const formData = {
 		id: generateIdentifier(),
 		endPoint: '/insert-update-organisation',
-		hiddenID: oldData ? oldData['id'] : null,
 		formData: [
 			{ label: 'Name', type: 'text', name: 'name', colSize: 4 },
 			{ label: 'Description', type: 'text', name: 'description', colSize: 8 },
 		]
 	}
+
+	const fetchRecords = () => {
+		const sessionData = fetchData('sessionData')
+		SocketIO.emit('/fetch-organisation', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setRecords(response.data)
+			}
+		})
+	}
+
+	useEffect(()=> {
+		fetchRecords()
+		SocketIO.on('/organisation/broadcast', () => {
+			fetchRecords()
+		})
+	}, [])
 	
     return (
         <>
 			<CustomFormComponent formData={formData} />
-			<div class="row">
-            	<div class="col-lg-12 grid-margin stretch-card">
-              		<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">ORGANISATION</h4>
-							<div class="table-responsive">
-								<table class="table table-striped">
+			<div className="row">
+            	<div className="col-lg-12 grid-margin stretch-card">
+              		<div className="card">
+						<div className="card-body">
+							<h4 className="card-title">ORGANISATION</h4>
+							<div className="table-responsive">
+								<table className="table table-striped">
 									<thead>
 										<tr>
 											<th>
@@ -39,17 +54,21 @@ const Organisation = () => {
 										</tr>
                       				</thead>
                       				<tbody>
-										<tr>
-											<td>
-												Womens' Fellowship
-											</td>
-											<td>
-												All Mbaaku
-											</td>
-											<td>
-												Live
-											</td>
-										</tr>
+									  {records && records.length > 0 ? records.map((record) => {
+											return (
+												<tr>
+													<td>
+														{record.name}
+													</td>
+													<td>
+														{record.description}
+													</td>
+													<td>
+														{record.status}
+													</td>
+												</tr>
+											)
+										}) : null}
                       				</tbody>
 								</table>
 							</div>

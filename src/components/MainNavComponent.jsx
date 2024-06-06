@@ -34,9 +34,9 @@ const MainNavComponent = () => {
                         aria-expanded={expandedMenu === index ? "true" : "false"}
                         aria-controls={`sub-menu-${index}`}
                     >
-                        <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                        <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
                         <span className="menu-title">{category.title}</span>
-                        <i class="fa fa-caret-down" aria-hidden="true" style={{marginLeft: 10}}></i>
+                        <i className="fa fa-caret-down" aria-hidden="true" style={{marginLeft: 10}}></i>
                     </p>
                     <div className={`collapse ${expandedMenu === index ? "show" : ""}`} id={`sub-menu-${index}`}>
                         <ul className="nav flex-column sub-menu">
@@ -51,32 +51,32 @@ const MainNavComponent = () => {
 
     return (
         <>
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" onClick={() => navigate('/dashboard')}>
-                            <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span class="menu-title">Dashboard</span>
-                            {/* <div class="badge badge-info badge-pill">2</div> */}
+            <nav className="sidebar sidebar-offcanvas" id="sidebar">
+                <ul className="nav">
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={() => navigate('/dashboard')}>
+                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Dashboard</span>
+                            {/* <div className="badge badge-info badge-pill">2</div> */}
                         </a>
                     </li>
                     {renderNavigation()}
-                    <li class="nav-item">
-                        <a class="nav-link" onClick={() => navigate('/department')}>
-                            <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span class="menu-title">Departments</span>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={() => navigate('/department')}>
+                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Departments</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" onClick={() => navigate('/calendar_event')}>
-                            <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span class="menu-title">Calendar & Events</span>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={() => navigate('/calendar_event')}>
+                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Calendar & Events</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" onClick={() => navigate('/organisation')}>
-                            <i class="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span class="menu-title">Organisation</span>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={() => navigate('/organisation')}>
+                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Organisation</span>
                         </a>
                     </li>
                 </ul>

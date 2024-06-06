@@ -1,29 +1,46 @@
-import React, { useState } from 'react';
-import { generateIdentifier } from '../../modules/helper';
+import React, { useEffect, useState } from 'react';
+import { SocketIO, fetchData, fullDate, generateIdentifier, shortenText } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
 const SendEmail = () => {
+	const [records, setRecords] = useState([])
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/send_mail',
+		endPoint: '/send-email',
 		formData: [
-			{ label: 'Subject', type: 'text', name: 'subject', colSize: 4 },
-			{ label: 'Message', type: 'text', name: 'message', colSize: 8 },
-			{ label: 'Email list', type: 'textarea', name: 'mails', colSize: 12 }
+			{ label: 'Department', type: 'fetchList', name: 'departmentID', fetchEndPoint: '/fetch-department', display: ['name'], colSize: 4 },
+			{ label: 'Subject', type: 'text', name: 'subject', colSize: 8 },
+			{ label: 'Message', type: 'textarea', name: 'message', colSize: 12 },
 		]
 	}
+
+	const fetchRecords = () => {
+		const sessionData = fetchData('sessionData')
+		SocketIO.emit('/fetch-email', { sessionID: sessionData.token, limit: 100, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setRecords(response.data)
+			}
+		})
+	}
+
+	useEffect(()=> {
+		fetchRecords()
+		SocketIO.on('/send_mail/broadcast', () => {
+			fetchRecords()
+		})
+	}, [])
 	
     return (
         <>
 			<CustomFormComponent formData={formData} />
-			<div class="row">
-            	<div class="col-lg-12 grid-margin stretch-card">
-              		<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">SEND EMAIL</h4>
-							<div class="table-responsive">
-								<table class="table table-striped">
+			<div className="row">
+            	<div className="col-lg-12 grid-margin stretch-card">
+              		<div className="card">
+						<div className="card-body">
+							<h4 className="card-title">SEND EMAIL</h4>
+							<div className="table-responsive">
+								<table className="table table-striped">
 									<thead>
 										<tr>
 											<th>
@@ -44,23 +61,27 @@ const SendEmail = () => {
 										</tr>
                       				</thead>
                       				<tbody>
-										<tr>
-											<td>
-												2024-05-23
-											</td>
-											<td>
-												Helo
-											</td>
-											<td>
-												All Mbaaku assembly
-											</td>
-											<td>
-												sent 1, failed 2
-											</td>
-											<td>
-												DETAIL
-											</td>
-										</tr>
+									  {records && records.length > 0 ? records.map((record) => {
+											return (
+												<tr>
+													<td>
+														{fullDate(record.createdAt)}
+													</td>
+													<td>
+														{record.subject}
+													</td>
+													<td>
+														{shortenText(record.message, 50)}
+													</td>
+													<td>
+														{record.sent_status}
+													</td>
+													<td>
+														DETAILS
+													</td>
+												</tr>
+											)
+										}) : null}
                       				</tbody>
 								</table>
 							</div>

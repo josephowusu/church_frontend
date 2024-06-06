@@ -8,12 +8,12 @@ import MainFooterComponent from '../components/MainFooterComponent'
 const DashboardContext = (props) => {
     return (
         <>
-            <div class="container-scroller d-flex">
+            <div className="container-scroller d-flex">
                 <MainNavComponent />
-                <div class="container-fluid page-body-wrapper">
+                <div className="container-fluid page-body-wrapper">
                     <MainHeaderComponent />
-                    <div class="main-panel">
-                        <div class="content-wrapper">
+                    <div className="main-panel">
+                        <div className="content-wrapper">
                             {props.children}
                             <Outlet />
                         </div>

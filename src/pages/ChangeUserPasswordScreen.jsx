@@ -34,25 +34,25 @@ const ChangePasswordScreen = () => {
 
     return (
         <>
-            <section id="contact" class="contact mb-5">
-                <div class="container align-items-center" data-aos="fade-up">
-                    <div class="row">
-                        <div class="col-lg-12 text-center mb-5">
-                            <h1 class="page-title">Set New Password</h1>
+            <section id="contact" className="contact mb-5">
+                <div className="container align-items-center" data-aos="fade-up">
+                    <div className="row">
+                        <div className="col-lg-12 text-center mb-5">
+                            <h1 className="page-title">Set New Password</h1>
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>
                         <div className="form mt-5 col-12 col-md-6">
-                            <form action="#" method="post" role="form" class="php-email-form">
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)} required />
+                            <form action="#" method="post" role="form" className="php-email-form">
+                                <div className="row">
+                                    <div className="form-group col-md-12">
+                                        <input type="password" className="form-control" name="password" id="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)} required />
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <input type="password" class="form-control" name="passwordC" id="passwordC" placeholder="Confirm Password" onChange={(e)=> setPasswordC(e.target.value)} required />
+                                    <div className="form-group col-md-12">
+                                        <input type="password" className="form-control" name="passwordC" id="passwordC" placeholder="Confirm Password" onChange={(e)=> setPasswordC(e.target.value)} required />
                                     </div>
                                 </div>
-                                <div class="text-left"><button type="submit" onClick={onSubmit}>Submit</button></div>
+                                <div className="text-left"><button type="submit" onClick={onSubmit}>Submit</button></div>
                             </form>
                         </div>
                     </div>

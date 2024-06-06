@@ -25,18 +25,21 @@ const Department = () => {
 
 	useEffect(()=> {
 		fetchRecords()
+		SocketIO.on('/department/broadcast', () => {
+			fetchRecords()
+		})
 	}, [])
 	
     return (
         <>
 			<CustomFormComponent formData={formData} />
-			<div class="row">
-            	<div class="col-lg-12 grid-margin stretch-card">
-              		<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">DEPARTMENTS</h4>
-							<div class="table-responsive">
-								<table class="table table-striped">
+			<div className="row">
+            	<div className="col-lg-12 grid-margin stretch-card">
+              		<div className="card">
+						<div className="card-body">
+							<h4 className="card-title">DEPARTMENTS</h4>
+							<div className="table-responsive">
+								<table className="table table-striped">
 									<thead>
 										<tr>
 											<th>

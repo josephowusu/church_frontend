@@ -1,171 +1,188 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HeroSlider from '../components/HeroSlider';
 import { postData, trendingData } from '../modules/dummyData';
 import image1 from "./../images/backgroundImage2.jpeg"
 import logo from "./../images/logo.jpeg"
 import pastor from "./../images/pastor.jpeg"
+import { SocketIO, fetchData, fullDate } from '../modules/helper';
 
-const PostComponent = ({ post }) => (
-    <div className="post-entry-1">
-        <a href="/">
-            <img src={logo} alt="" className="img-fluid" />
-        </a>
-        <div className="post-meta">
-            <span className="date">{post.category}</span>
-            <span className="mx-1">&bullet;</span>
-            <span>{post.date}</span>
-        </div>
-        <h2>
-            <a href="/">{post.title}</a>
-        </h2>
-    </div>
-)
-
-const PostList = ({ postData }) => {
-    const pairs = [];
-    for (let i = 0; i < postData.length; i += 2) {
-        pairs.push(postData.slice(i, i + 2))
-    }
-
-    return (
-        <>
-            {pairs.map((pair, index) => (
-                <React.Fragment key={index}>
-                    <div className="col-lg-4 border-start custom-border">
-                        {pair[0] && <PostComponent post={pair[0]} />}
-                    </div>
-                    <div className="col-lg-4 border-start custom-border">
-                        {pair[1] && <PostComponent post={pair[1]} />}
-                    </div>
-                </React.Fragment>
-            ))}
-        </>
-    )
-}
 
 const Home = () => {
+    const [post, setPost] = useState([])
+    const [organisations, setOrganisations] = useState([])
+
+    const fetchEvent = () => {
+        const sessionData = fetchData('sessionData')
+		SocketIO.emit('/fetch-organisation', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setOrganisations(response.data)
+			}
+		})
+    }
+
+    useEffect(() => {
+        fetchEvent()
+    }, [])
+
     return (
         <>
             <HeroSlider />
             <section id="posts" className="posts">
                 <div className="container" data-aos="fade-up">
                     <div className="row g-5">
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <div className="post-entry-1 lg">
                                 <a href="/">
-                                    <img src={pastor} alt="" className="img-fluid" style={{height: 400, width: '100%'}} />
+                                    <img src={pastor} alt="" className="img-fluid" style={{height: 300, width: '100%'}} />
                                 </a>
-                                <div className="post-meta">
+                                <div className="post-meta"> 
                                     <span className="date">About Us</span> 
                                     <span className="mx-1">&bullet;</span> 
-                                    <span>Jul 5th '22</span>
+                                    <span>Jul 5th '22</span> 
                                 </div>
-                                <h2><a href="/">The Apostles Continuation Church International (ACCI)</a></h2>
-                                <p className="mb-4 d-block">The Apostles Continuation Church International (ACCI) is a vibrant and dynamic community of believers dedicated to spreading the love and teachings of Jesus Christ, ACCI has grown from a small gathering of faithful individuals to a flourishing congregation with a mission to impact lives and transform communities</p>
+                                <h2><a href="/" style={{fontSize: 25}}>The Apostles Continuation Church International (ACCI)</a></h2>
+                                <p className="mb-4 d-block" style={{fontSize: 12}}>The Apostles Continuation Church International (ACCI) is a vibrant and dynamic community of believers dedicated to spreading the love and teachings of Jesus Christ, ACCI has grown from a small gathering of faithful individuals to a flourishing congregation with a mission to impact lives and transform communities</p>
                                 <div className="d-flex align-items-center author">
                                     <div className="photo">
-                                        <img src={pastor} alt="" className="img-fluid" />
+                                        <img src={pastor} alt="" style={{height: 50, width: 50}} className="img-fluid" />
                                     </div>
                                     <div className="name">
-                                        <h3 className="m-0 p-0">Apostle Clement Brakatu</h3>
+                                        <h4 className="m-0 p-0">Apostle Clement Brakatu</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="col-lg-8">
+                        <div className="col-lg-6">
                             <div className="row g-5">
-                                {/* <div className="col-lg-4 border-start custom-border">
-                                    <div className="post-entry-1">
-                                        <a href="/">
-                                            <img src="assets/img/post-landscape-2.jpg" alt="" className="img-fluid" />
-                                        </a>
-                                        <div className="post-meta">
-                                            <span className="date">Sport</span> 
-                                            <span className="mx-1">&bullet;</span> 
-                                            <span>Jul 5th '22</span>
+                                {organisations && organisations.length > 0 ? organisations.map((organisation, index) => (
+                                    <div className={`col-lg-6 ${index % 2 === 1 ? 'border-start custom-border' : ''}`} key={index}>
+                                        <div className="post-entry-1">
+                                            <a href={organisation.link}><img src={logo} alt="" className="img-fluid" /></a>
+                                            <div className="post-meta">
+                                                <span>{fullDate(organisation.createdAt)}</span>
+                                            </div>
+                                            <h2><a href={organisation.link}>{organisation.name}</a></h2>
                                         </div>
-                                        <h2>
-                                            <a href="/">Let{'’'}s Get Back to Work, New York</a>
-                                        </h2>
                                     </div>
-                                    <div className="post-entry-1">
-                                        <a href="/">
-                                            <img src="assets/img/post-landscape-5.jpg" alt="" className="img-fluid" />
-                                        </a>
-                                        <div className="post-meta">
-                                            <span className="date">Food</span> 
-                                            <span className="mx-1">&bullet;</span> 
-                                            <span>Jul 17th '22</span>
-                                        </div>
-                                        <h2>
-                                            <a href="/">
-                                                How to Avoid Distraction and Stay Focused During Video Calls?
-                                            </a>
-                                        </h2>
-                                    </div>
-                                    <div className="post-entry-1">
-                                        <a href="/"><img src="assets/img/post-landscape-7.jpg" alt="" className="img-fluid" /></a>
-                                        <div className="post-meta"><span className="date">Design</span> <span className="mx-1">&bullet;</span> <span>Mar 15th '22</span></div>
-                                        <h2><a href="/">Why Craigslist Tampa Is One of The Most Interesting Places On the Web?</a></h2>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 border-start custom-border">
-                                    <div className="post-entry-1">
-                                        <a href="/">
-                                            <img src="assets/img/post-landscape-2.jpg" alt="" className="img-fluid" />
-                                        </a>
-                                        <div className="post-meta">
-                                            <span className="date">Sport</span> 
-                                            <span className="mx-1">&bullet;</span> 
-                                            <span>Jul 5th '22</span>
-                                        </div>
-                                        <h2>
-                                            <a href="/">Let{'’'}s Get Back to Work, New York</a>
-                                        </h2>
-                                    </div>
-                                    <div className="post-entry-1">
-                                        <a href="/">
-                                            <img src="assets/img/post-landscape-5.jpg" alt="" className="img-fluid" />
-                                        </a>
-                                        <div className="post-meta">
-                                            <span className="date">Food</span> 
-                                            <span className="mx-1">&bullet;</span> 
-                                            <span>Jul 17th '22</span>
-                                        </div>
-                                        <h2>
-                                            <a href="/">
-                                                How to Avoid Distraction and Stay Focused During Video Calls?
-                                            </a>
-                                        </h2>
-                                    </div>
-                                    <div className="post-entry-1">
-                                        <a href="/"><img src="assets/img/post-landscape-7.jpg" alt="" className="img-fluid" /></a>
-                                        <div className="post-meta"><span className="date">Design</span> <span className="mx-1">&bullet;</span> <span>Mar 15th '22</span></div>
-                                        <h2><a href="/">Why Craigslist Tampa Is One of The Most Interesting Places On the Web?</a></h2>
-                                    </div>
-                                </div> */}
-                                <PostList postData={postData} />
-                                {/* <div className="col-lg-4">
-                                    <div className="trending">
-                                        <h3>Trending</h3>
-                                        <ul className="trending-post">
-                                            {trendingData && trendingData.length > 0 ? trendingData.map((trend, length) => (
-                                                <>
-                                                    <li>
-                                                        <a href="/">
-                                                            <span className="number">{length}</span>
-                                                            <h3>{trend.eventName}</h3>
-                                                            <span className="author">{trend.location}</span>
-                                                        </a>
-                                                    </li>
-                                                </>
-                                            )) : null}
-                                        </ul>
-                                    </div>
-                                </div> */}
+                                )) : null}
                             </div>
                         </div>
+                        <div className="col-lg-3">
+                            <div className="trending">
+                                <h3>Trending Event and Topics</h3>
+                                <ul className="trending-post">
+                                    {trendingData.map((item, index) => (
+                                        <li key={index}>
+                                            <a href={item.link}>
+                                            <span className="number">{index + 1}</span>
+                                            <h3>{item.eventName}</h3>
+                                            <span className="author">{item.location}</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="category-section">
+                <div className="container" data-aos="fade-up">
+                    <div className="section-header d-flex justify-content-between align-items-center mb-5">
+                        <h2>Events</h2>
+                        <div>
+                            <a href="category.html" className="more">See All Events</a>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-md-9 order-md-2">
+                            <div className="d-lg-flex post-entry-2">
+                                <a href="single-post.html" className="me-4 thumbnail d-inline-block mb-4 mb-lg-0">
+                                    <img src="assets/img/post-landscape-3.jpg" alt="" className="img-fluid" />
+                                </a>
+                            <div>
+                            <div className="post-meta">
+                                <span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span>
+                            </div>
+                            <h3>
+                                <a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</a>
+                            </h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente, laudantium dolorum itaque libero eos deleniti?</p>
+                            <div className="d-flex align-items-center author">
+                                <div className="photo"><img src="assets/img/person-4.jpg" alt="" className="img-fluid" /></div>
+                                <div className="name">
+                                    <h3 className="m-0 p-0">Wade Warren</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div className="row">
+                        <div className="col-lg-4">
+                            <div className="post-entry-1 border-bottom">
+                            <a href="single-post.html"><img src="assets/img/post-landscape-5.jpg" alt="" className="img-fluid" /></a>
+                            <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                            <h2 className="mb-2"><a href="single-post.html">11 Work From Home Part-Time Jobs You Can Do Now</a></h2>
+                            <span className="author mb-3 d-block">Jenny Wilson</span>
+                            <p className="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae, inventore pariatur numquam cumque possimus</p>
+                            </div>
+
+                            <div className="post-entry-1">
+                            <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                            <h2 className="mb-2"><a href="single-post.html">5 Great Startup Tips for Female Founders</a></h2>
+                            <span className="author mb-3 d-block">Jenny Wilson</span>
+                            </div>
+                        </div>
+                        <div className="col-lg-8">
+                            <div className="post-entry-1">
+                            <a href="single-post.html"><img src="assets/img/post-landscape-7.jpg" alt="" className="img-fluid" /></a>
+                            <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                            <h2 className="mb-2"><a href="single-post.html">How to Avoid Distraction and Stay Focused During Video Calls?</a></h2>
+                            <span className="author mb-3 d-block">Jenny Wilson</span>
+                            <p className="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae, inventore pariatur numquam cumque possimus</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="post-entry-1 border-bottom">
+                        <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                        <h2 className="mb-2"><a href="single-post.html">How to Avoid Distraction and Stay Focused During Video Calls?</a></h2>
+                        <span className="author mb-3 d-block">Jenny Wilson</span>
+                        </div>
+
+                        <div className="post-entry-1 border-bottom">
+                        <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                        <h2 className="mb-2"><a href="single-post.html">17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</a></h2>
+                        <span className="author mb-3 d-block">Jenny Wilson</span>
+                        </div>
+
+                        <div className="post-entry-1 border-bottom">
+                        <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                        <h2 className="mb-2"><a href="single-post.html">9 Half-up/half-down Hairstyles for Long and Medium Hair</a></h2>
+                        <span className="author mb-3 d-block">Jenny Wilson</span>
+                        </div>
+
+                        <div className="post-entry-1 border-bottom">
+                        <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                        <h2 className="mb-2"><a href="single-post.html">Life Insurance And Pregnancy: A Working Mom’s Guide</a></h2>
+                        <span className="author mb-3 d-block">Jenny Wilson</span>
+                        </div>
+
+                        <div className="post-entry-1 border-bottom">
+                        <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                        <h2 className="mb-2"><a href="single-post.html">The Best Homemade Masks for Face (keep the Pimples Away)</a></h2>
+                        <span className="author mb-3 d-block">Jenny Wilson</span>
+                        </div>
+
+                        <div className="post-entry-1 border-bottom">
+                        <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                        <h2 className="mb-2"><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should Know</a></h2>
+                        <span className="author mb-3 d-block">Jenny Wilson</span>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </section>

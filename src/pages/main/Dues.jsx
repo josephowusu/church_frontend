@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
-import { generateIdentifier } from '../../modules/helper';
+import React, { useEffect, useState } from 'react';
+import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
 const Dues = () => {
+	const [records, setRecords] = useState({})
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/insert-update-department',
+		endPoint: '/insert-dues',
 		formData: [
-			{ label: 'Date (YYYY-MM-DD)', type: 'text', name: 'date', colSize: 6 },
-			{ label: 'Amount', type: 'number', name: 'amount', colSize: 6 },
+			{ label: 'Member', type: 'fetchList', name: 'memberID', required: true, fetchEndPoint: '/fetch-members', display: ['firstName', 'otherName', 'lastName'], colSize: 8 },
+			{ label: 'Amount', type: 'number', name: 'amount', colSize: 4 }
 		]
 	}
+
+	const fetchRecords = () => {
+		const sessionData = fetchData('sessionData')
+		SocketIO.emit('/fetch-dues', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setRecords(response.data)
+				console.log(response.data)
+			}
+		})
+	}
+
+	useEffect(()=> {
+		fetchRecords()
+		SocketIO.on('/dues/broadcast', () => {
+			fetchRecords()
+		})
+	}, [])
 	
     return (
         <>
 			<CustomFormComponent formData={formData} />
-			<div class="row">
-            	<div class="col-lg-12 grid-margin stretch-card">
-              		<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">DUES</h4>
-							<div class="table-responsive">
-								<table class="table table-striped">
+			<div className="row">
+            	<div className="col-lg-12 grid-margin stretch-card">
+              		<div className="card">
+						<div className="card-body">
+							<h4 className="card-title">DUES</h4>
+							<div className="table-responsive">
+								<table className="table table-striped">
 									<thead>
 										<tr>
 											<th>
@@ -37,17 +55,25 @@ const Dues = () => {
 										</tr>
                       				</thead>
                       				<tbody>
-										<tr>
-											<td>
-												MAY 15, 2024
-											</td>
-											<td>
-												GHS7000.00
-											</td>
-											<td>
-												DETAILS
-											</td>
-										</tr>
+									  	{Object.entries(records).map(([createdAt, transactions]) => {
+											let totalAmount = 0
+											transactions.map((transaction) => {
+												totalAmount += Number(transaction.amount)
+											})
+											return (
+												<tr key={createdAt}>
+													<td>
+														{createdAt}
+													</td>
+													<td>
+														GHS{totalAmount}
+													</td>
+													<td>
+														DETAILS
+													</td>
+												</tr>
+											)
+										})}
                       				</tbody>
 								</table>
 							</div>

@@ -7,23 +7,23 @@ const CalenderAndEvent = () => {
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/insert-update-department',
+		endPoint: '/insert-update-event',
 		formData: [
 			{ label: 'Event Name', type: 'text', name: 'name', colSize: 6 }, { label: 'Location', type: 'text', name: 'location', colSize: 6 },
-			{ label: 'Description', type: 'text', name: 'description', colSize: 12 },
+			{ label: 'Description', type: 'text', name: 'description', colSize: 12 }, { label: 'DropZone', type: 'dropzone', name: 'files', colSize: 12 },
 		]
 	}
 	
     return (
         <>
 			<CustomFormComponent formData={formData} />
-			<div class="row">
-            	<div class="col-lg-12 grid-margin stretch-card">
-              		<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">CALENDAR AND EVENTS</h4>
-							<div class="table-responsive">
-								<table class="table table-striped">
+			<div className="row">
+            	<div className="col-lg-12 grid-margin stretch-card">
+              		<div className="card">
+						<div className="card-body">
+							<h4 className="card-title">CALENDAR AND EVENTS</h4>
+							<div className="table-responsive">
+								<table className="table table-striped">
 									<thead>
 										<tr>
 											<th>

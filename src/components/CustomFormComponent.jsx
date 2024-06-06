@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SocketIO, fetchData } from '../modules/helper';
+import Select from 'react-select';
+import Dropzone from './DropZoneComponent';
 
 function CustomFormComponent({formData}) {
     const [isLoading, setIsLoading] = useState(false)
@@ -29,10 +31,12 @@ function CustomFormComponent({formData}) {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
+        console.log({name}, value)
         setFormValues({
             ...formValues,
             [name]: value,
         })
+        console.log(formValues)
     }
 
     const clearForm = () => {
@@ -47,7 +51,7 @@ function CustomFormComponent({formData}) {
             return
         }
         const sessionData = fetchData('sessionData')
-        SocketIO.emit(formData.endPoint, {sessionID: sessionData.token, hiddenID: formData.hiddenID ? formData.hiddenID : null, ...formValues}, (response) => {
+        SocketIO.emit(formData.endPoint, {sessionID: sessionData ? sessionData.token : null, hiddenID: formData.hiddenID ? formData.hiddenID : null, ...formValues}, (response) => {
             setIsLoading(false)
             handleAlert(response.message, response.status)
         })
@@ -57,7 +61,7 @@ function CustomFormComponent({formData}) {
     const fetchOptions = async (field) => {
         try {
             const sessionData = fetchData('sessionData')
-            SocketIO.emit(field.fetchEndPoint, { sessionID: sessionData.token, limit: 10, offset: 0, search: searchValues[field.name]}, (response) => {
+            SocketIO.emit(field.fetchEndPoint, { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
                 if (response.status === 'success') {
                     const transformedOptions = response.data.map(option => ({
                         label: field.display.map((item) => item !== null ? option[item] : '').join(' '),
@@ -95,7 +99,7 @@ function CustomFormComponent({formData}) {
         formData.formData.forEach((field) => {
             setFormValues({
                 ...formValues,
-                [field.name]: `${field.value}`,
+                [field.name]: `${field.value ? field.value : ''}`,
             })
         })
     }, [])
@@ -106,6 +110,15 @@ function CustomFormComponent({formData}) {
             [field.name]: inputValue
         })
         fetchOptions(field)
+    }
+
+    const onChangeFile = (field, value) => {
+        console.log(field, value)
+        console.log(formValues)
+        setFormValues({
+            ...formValues,
+            [field]: value,
+        })
     }
 
     return (
@@ -119,13 +132,48 @@ function CustomFormComponent({formData}) {
                                     <h3>{field.title} </h3>
                                 </div>
                             )}
+                            {field.type === "dropzone" && (
+                                <Dropzone fieldName={field.name} onChangeFile={onChangeFile} />
+                            )}
                             {field.type === "textarea" && (
                                 <div key={index} controlId={field.name} className={`form-group col-${field.colSize} mt-1`}>
                                     <label style={{ fontSize: 12 }}>{field.label} {field.required ? '*' : ''}</label>
-                                    <textarea key={index} className='form-control' placeholder={field.label} required={field.required}>   
+                                    <textarea 
+                                        key={index} 
+                                        className='form-control' 
+                                        name={field.name}
+                                        placeholder={field.label} 
+                                        required={field.required}
+                                        // value={formValues[field.name] || ''}
+                                        onChange={handleInputChange}
+                                        rows={5}
+                                        dissabled={field.dissabled}
+                                    > 
                                     </textarea>
                                 </div>
                             )}
+                            {field.type === "fetchList" && (
+                                <div key={index} controlId={field.name} className={`col-${field.colSize} mt-1`}>
+                                    <label style={{ fontSize: 12, marginBottom: 12 }}>{field.label} {field.required ? '*' : ''}</label>
+                                    <Select
+                                        name={field.name}
+                                        value={formValues[field.name]}
+                                        onChange={handleChange}
+                                        options={optionsFetched[field.name]}
+                                        isLoading={isLoading}
+                                        isSearchable={true}
+                                        onInputChange={(value)=>handleInputChange2(value, field)}
+                                        placeholder={formValues[field.name] ? formValues[field.name] : 'None'}
+                                        styles={{
+                                            control: (provided) => ({
+                                                ...provided,
+                                                height: 46
+                                            }),
+                                        }}
+                                    />
+                                </div>
+                            )}
+
                             {field.type === "text" || field.type === "tel" || field.type === "email" || field.type === "number" ? (
                                 <div key={index} controlId={field.name} className={`form-group col-${field.colSize} mt-1`}>
                                     <label style={{ fontSize: 12 }}>{field.label} {field.required ? '*' : ''}</label>
@@ -134,7 +182,7 @@ function CustomFormComponent({formData}) {
                                         name={field.name}
                                         className='form-control'
                                         placeholder={field.label} 
-                                        value={formValues[field.name]}
+                                        value={formValues[field.name] || ''}
                                         onChange={handleInputChange}
                                         required={field.required}
                                         dissabled={field.dissabled}

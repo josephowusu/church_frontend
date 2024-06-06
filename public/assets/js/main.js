@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavToogleButton = document.querySelector('.mobile-nav-toggle');
 
   if (mobileNavToogleButton) {
+    
     mobileNavToogleButton.addEventListener('click', function(event) {
       event.preventDefault();
       mobileNavToogle();
