@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { APIClient } from '../modules/helper';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 const ChangePasswordScreen = () => {
     const navigate = useNavigate()
+    const { email } = useParams()
     const [password, setPassword] = useState('')
     const [passwordC, setPasswordC] = useState('')
 
@@ -19,7 +20,7 @@ const ChangePasswordScreen = () => {
             toast("Passwords doesnt match", { position: "top-right" })
             return
         }
-        APIClient.post('/change_user_password', {email: 'josephowusu027@proton.me', password: password}).then((response) => {
+        APIClient.post('/change_user_password', {email: email, password: password}).then((response) => {
             console.log(response.data)
             if (response.data.status === "success") {
                 toast(response.data.message, { position: "top-right" })

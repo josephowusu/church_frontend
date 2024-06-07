@@ -17,9 +17,6 @@ const ForgotPassword = () => {
         APIClient.post('/check_user_email', { email }).then((response) => {
             if (response.data.status === "success") {
                 toast(response.data.message, { position: "top-right" })
-                // setTimeout(() => {
-                //     navigate('/set_new_password')
-                // }, 1500)
             } else {
                 toast(response.data.message, { position: "top-right" })
             }

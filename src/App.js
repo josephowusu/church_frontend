@@ -29,7 +29,7 @@ function App() {
 					<Route path="/user_login" element={<LoginScreen />} />
 					<Route path="/user_register" element={<RegisterScreen />} />
 					<Route path="/forgot_password" element={<ForgotPassword />} />
-					<Route path="/set_new_password" element={<ChangePasswordScreen />} />
+					<Route path="/set_new_password/:email" element={<ChangePasswordScreen />} />
 					<Route path="/contact_us" element={<Support />} />
 					<Route path="/post/:id" element={<Post /> } />
 				</Route>
