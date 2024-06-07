@@ -17,7 +17,7 @@ const Support = () => {
                 <div className="container align-items-center" data-aos="fade-up">
                     <div className="row">
                         <div className="col-lg-12 text-center mb-5">
-                            <h1 className="page-title">Support</h1>
+                            <h1 className="page-title">Contact Us</h1>
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>

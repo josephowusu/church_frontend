@@ -21,18 +21,8 @@ const HeaderComponent = () => {
                     <nav id="navbar" className="navbar">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li className="dropdown"><a href="#"><span>Account</span> <i className="bi bi-chevron-down dropdown-indicator"></i></a>
-                                <ul>
-                                    <li className="dropdown"><a href="/user_register"><span>Get Started</span> <i className="bi bi-chevron-down dropdown-indicator"></i></a>
-                                        <ul> 
-                                            <li><a href="/user_login">Login</a></li>
-                                            <li><a href="/user_register">Register</a></li>
-                                            <li><a href="/support">Support</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="/user_login">Login</a></li>
+                            <li><a href="/contact_us">Contact</a></li>
                         </ul>
                     </nav>
 

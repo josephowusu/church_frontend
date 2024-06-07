@@ -1,18 +1,36 @@
 
-import React, { useState } from 'react';
-import { generateIdentifier } from '../../modules/helper';
+import React, { useEffect, useState } from 'react';
+import { SocketIO, fetchData, generateIdentifier, shortenText } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
 const CalenderAndEvent = () => {
+	const [records, setRecords] = useState([])
 
 	const formData = {
 		id: generateIdentifier(),
 		endPoint: '/insert-update-event',
 		formData: [
-			{ label: 'Event Name', type: 'text', name: 'name', colSize: 6 }, { label: 'Location', type: 'text', name: 'location', colSize: 6 },
-			{ label: 'Description', type: 'text', name: 'description', colSize: 12 }, { label: 'DropZone', type: 'dropzone', name: 'files', colSize: 12 },
+			{ label: 'Event Name', type: 'text', name: 'title', colSize: 6 }, { label: 'Location', type: 'text', name: 'location', colSize: 6 },
+			{ label: 'Description', type: 'text', name: 'description', colSize: 12 }, { label: 'Extra Details (Dress Color, Meeting place etc.)', type: 'text', name: 'extraInfo', colSize: 12 }, 
+			{ label: 'DropZone', type: 'dropzone', name: 'files', colSize: 12 },
 		]
 	}
+
+	const fetchRecords = () => {
+		const sessionData = fetchData('sessionData')
+		SocketIO.emit('/fetch-event', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+			if (response.status === 'success') {
+				setRecords(response.data)
+			}
+		})
+	}
+
+	useEffect(()=> {
+		fetchRecords()
+		SocketIO.on('/event/broadcast', () => {
+			fetchRecords()
+		})
+	}, [])
 	
     return (
         <>
@@ -36,25 +54,29 @@ const CalenderAndEvent = () => {
 												LOCATION
 											</th>
                                             <th>
-												DETAILS
+												CHECK
 											</th>
 										</tr>
                       				</thead>
                       				<tbody>
-										<tr>
-											<td>
-												Wedding
-											</td>
-											<td>
-												Our Pastor ohNana weds our beautiful Maame Grace brakatu
-											</td>
-											<td>
-												GOD IS LOVE CHOPBAR
-											</td>
-                                            <td>
-												DETAILS
-											</td>
-										</tr>
+									  {records && records.length > 0 ? records.map((record) => {
+											return (
+												<tr>
+													<td>
+														{record.title ? shortenText(record.title, 30) : ''}
+													</td>
+													<td>
+														{record.description ? shortenText(record.description, 90) : ''}
+													</td>
+													<td>
+														{record.location}
+													</td>
+													<td>
+														DETAILS
+													</td>
+												</tr>
+											)
+										}) : null}
                       				</tbody>
 								</table>
 							</div>

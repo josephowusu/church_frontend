@@ -113,11 +113,9 @@ function CustomFormComponent({formData}) {
     }
 
     const onChangeFile = (field, value) => {
-        console.log(field, value)
-        console.log(formValues)
         setFormValues({
             ...formValues,
-            [field]: value,
+            [field]: value && Array.isArray(value) ? JSON.stringify(value) : value,
         })
     }
 

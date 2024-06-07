@@ -26,7 +26,7 @@ const Dashboard = () => {
             	<div className="col-lg-12 grid-margin stretch-card">
               		<div className="card">
                 		<div className="card-body">
-                  			<h4 className="card-title">Members Financial management review</h4>
+                  			<h4 className="card-title" style={{textTransform: 'uppercase'}}>Members Financial management review</h4>
                   			<div className="table-responsive">
                     			<table className="table table-striped">
                       				<thead>

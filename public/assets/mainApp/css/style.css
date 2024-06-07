@@ -21733,7 +21733,7 @@ dl li {
 }
 
 .sidebar .nav .nav-item .nav-link i.menu-icon {
-  font-size: 1.125rem;
+  /* font-size: 1.125rem; */
   line-height: 1;
   margin-right: 1.125rem;
   color: #ffffff;
@@ -21773,7 +21773,7 @@ dl li {
   font-size: 0.937rem;
   line-height: 1;
   vertical-align: middle;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .sidebar .nav .nav-item .nav-link .badge {

@@ -18,6 +18,7 @@ import Organisation from './pages/main/Organisation';
 import Tithes from './pages/main/Tithes';
 import Offerings from './pages/main/Offerings';
 import Dues from './pages/main/Dues';
+import Post from './pages/Post';
 
 function App() {
 	return (
@@ -29,7 +30,8 @@ function App() {
 					<Route path="/user_register" element={<RegisterScreen />} />
 					<Route path="/forgot_password" element={<ForgotPassword />} />
 					<Route path="/set_new_password" element={<ChangePasswordScreen />} />
-					<Route path="/support" element={<Support />} />
+					<Route path="/contact_us" element={<Support />} />
+					<Route path="/post/:id" element={<Post /> } />
 				</Route>
 				<Route element={<DashboardContext /> }>
 					<Route path="/dashboard" element={<Dashboard /> } />

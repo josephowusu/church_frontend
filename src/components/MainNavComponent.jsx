@@ -25,26 +25,24 @@ const MainNavComponent = () => {
 
     const renderNavigation = () => {
         return Object.values(Router).map((category, index) => (
-            <>
-                <li key={index} className="nav-item" style={{cursor: 'pointer'}}>
-                    <p
-                        className="nav-link"
-                        onClick={() => toggleSubMenu(index)}
-                        data-toggle="collapse"
-                        aria-expanded={expandedMenu === index ? "true" : "false"}
-                        aria-controls={`sub-menu-${index}`}
-                    >
-                        <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                        <span className="menu-title">{category.title}</span>
-                        <i className="fa fa-caret-down" aria-hidden="true" style={{marginLeft: 10}}></i>
-                    </p>
-                    <div className={`collapse ${expandedMenu === index ? "show" : ""}`} id={`sub-menu-${index}`}>
-                        <ul className="nav flex-column sub-menu">
-                            {renderSubPages(category.subPages)}
-                        </ul>
-                    </div>
-                </li>
-            </>
+            <li key={index} className="nav-item" style={{cursor: 'pointer'}}>
+                <p
+                    className="nav-link"
+                    onClick={() => toggleSubMenu(index)}
+                    data-toggle="collapse"
+                    aria-expanded={expandedMenu === index ? "true" : "false"}
+                    aria-controls={`sub-menu-${index}`}
+                >
+                    <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                    <span className="menu-title">{category.title}</span>
+                    <i className="fa fa-caret-down" aria-hidden="true" style={{marginLeft: 10}}></i>
+                </p>
+                <div className={`collapse ${expandedMenu === index ? "show" : ""}`} id={`sub-menu-${index}`}>
+                    <ul className="nav flex-column sub-menu">
+                        {renderSubPages(category.subPages)}
+                    </ul>
+                </div>
+            </li>
         ))
     }
 

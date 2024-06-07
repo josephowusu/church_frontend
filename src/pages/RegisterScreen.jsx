@@ -73,6 +73,7 @@ const RegisterScreen = () => {
                                     </div>
                                 </div>
                                 <div className="text-left"><button type="submit" onClick={onSubmit}>Submit</button></div>
+                                <p style={{fontSize: 12, marginTop: 10}}>Already have an account? <a href='/user_login' style={{color: 'red'}}>Login</a></p>
                             </form>
                         </div>
                     </div>

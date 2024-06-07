@@ -50,6 +50,7 @@ const LoginScreen = () => {
                                 </div>
                                 <div className="text-left"><button type="submit" onClick={onSubmit}>Submit</button></div><br />
                                 <p style={{fontSize: 12, marginTop: 10}}>Forgot my password <a href='/forgot_password' style={{color: 'red'}}>change password</a></p>
+                                <p style={{fontSize: 12, marginTop: 10}}>New Here? <a href='/user_register' style={{color: 'red'}}>Create new account</a></p>
                             </form>
                         </div>
                     </div>
