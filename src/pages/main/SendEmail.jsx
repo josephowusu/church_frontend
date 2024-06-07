@@ -17,7 +17,7 @@ const SendEmail = () => {
 
 	const fetchRecords = () => {
 		const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-email', { sessionID: sessionData.token, limit: 100, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-email', { sessionID: sessionData ? sessionData.token : null, limit: 100, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}

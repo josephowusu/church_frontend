@@ -16,7 +16,7 @@ const Organisation = () => {
 
 	const fetchRecords = () => {
 		const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-organisation', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-organisation', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}
