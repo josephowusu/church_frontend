@@ -103,7 +103,7 @@ const Home = () => {
                         </div>
                         <div className="col-lg-3">
                             <div className="trending">
-                                <h3>Department</h3>
+                                <h3>Department(s)</h3>
                                 <ul className="trending-post">
                                     {department && department.length > 0 ? department.map((item, index) => (
                                         <li key={index}>
