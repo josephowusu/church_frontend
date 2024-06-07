@@ -20,7 +20,7 @@ const Home = () => {
 
     const fetchOrganisation = () => {
         const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-organisation', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-organisation', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setOrganisations(response.data)
 			}
@@ -29,7 +29,7 @@ const Home = () => {
 
     const fetchEvent = () => {
         const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-event-with-date', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-event-with-date', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setEvents(response.data.byDate)
 				setEventsByMember(response.data.byMember)
@@ -40,7 +40,7 @@ const Home = () => {
 
     const fetchDepartment = () => {
         const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-department', { sessionID: sessionData.token, limit: 10, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-department', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setDepartment(response.data)
 			}

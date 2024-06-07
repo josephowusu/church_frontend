@@ -14,10 +14,9 @@ const Post = () => {
 
     const fetchEvent = () => {
         const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-event', { sessionID: sessionData.token, limit: 10, offset: 0, hiddenID: id}, (response) => {
+		SocketIO.emit('/fetch-event', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0, hiddenID: id}, (response) => {
 			if (response.status === 'success') {
 				setPost(response.data)
-				console.log(response.data)
 			}
 		})
     }
