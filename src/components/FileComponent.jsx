@@ -1,8 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { api_url } from '../modules/credentials';
 
 const MediaComponent = ({ event }) => {
-    const navigate = useNavigate()
     const isImage = (file) => /\.(jpg|jpeg|png|gif)$/.test(file);
     const isVideo = (file) => /\.(mp4|avi|mov|wmv|flv|mkv)$/.test(file);
 
@@ -19,22 +18,18 @@ const MediaComponent = ({ event }) => {
         }
     };
 
-    const goToPost = (postId) => {
-        navigate(`/post/${postId}`);
-    }
-
     const firstFile = getFirstFile(event.images);
     let media = '';
 
     if (firstFile) {
         if (isImage(firstFile)) {
             media = (
-                <img src={`http://localhost:3030/api/files/${firstFile}`} alt="" className="img-fluid" />
+                <img src={`${api_url}/api/files/${firstFile}`} alt="" className="img-fluid" />
             )
         } else if (isVideo(firstFile)) {
             media = (
                 <video controls={false} className="img-fluid">
-                    <source src={`http://localhost:3030/api/files/${firstFile}`} type="video/mp4" />
+                    <source src={`${api_url}/api/files/${firstFile}`} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             );

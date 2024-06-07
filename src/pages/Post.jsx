@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import HeroSlider from '../components/HeroSlider';
-import { postData, trendingData } from '../modules/dummyData';
-import image1 from "./../images/backgroundImage2.jpeg"
-import logo from "./../images/logo.jpeg"
-import pastor from "./../images/pastor.jpeg"
-import { SocketIO, fetchData, fullDate, shortenText } from '../modules/helper';
-import MediaComponent from '../components/FileComponent';
+import { SocketIO, fetchData, fullDate, shortenText } from '../modules/helper'
 import { useParams } from 'react-router-dom';
+import { api_url } from '../modules/credentials';
 
 const Post = () => {
     const [post, setPost] = useState([])
@@ -49,10 +44,10 @@ const Post = () => {
                                 {post[0] ? JSON.parse(post[0].images).map((file, fileIndex) => (
                                     <div key={fileIndex}>
                                         {isImage(file) ? (
-                                            <img src={`http://localhost:3030/api/files/${file}`} alt="" className="img-fluid" />
+                                            <img src={`${api_url}/api/files/${file}`} alt="" className="img-fluid" />
                                         ) : isVideo(file) ? (
                                             <video controls={true} className="img-fluid">
-                                                <source src={`http://localhost:3030/api/files/${file}`} type="video/mp4" />
+                                                <source src={`${api_url}/api/files/${file}`} type="video/mp4" />
                                                 Your browser does not support the video tag.
                                             </video>
                                         ) : null}
