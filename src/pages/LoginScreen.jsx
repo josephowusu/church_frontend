@@ -15,17 +15,21 @@ const LoginScreen = () => {
             toast('Required fields!', { position: "top-right" })
             return
         }
-        APIClient.post('/login_user', {email, password}).then((response) => {
-            if (response.data.status === "success") {
-                toast(response.data.message, { position: "top-right" })
-                storeData('userData', response.data.data)
-                setTimeout(() => {
-                    navigate('/dashboard')
-                }, 1500)
-            } else {
-                alert('An error occured')
-            }
-        })
+        try {
+            APIClient.post('/login_user', {email, password}).then((response) => {
+                if (response.data.status === "success") {
+                    toast(response.data.message, { position: "top-right" })
+                    storeData('userData', response.data.data)
+                    setTimeout(() => {
+                        navigate('/dashboard')
+                    }, 1500)
+                } else {
+                    toast(response.data.message, { position: "top-right" })
+                }
+            })
+        } catch (error) {
+            toast(error.message, { position: "top-right" })
+        }
     }
 
     return (
