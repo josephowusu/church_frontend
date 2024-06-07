@@ -125,7 +125,7 @@ const Home = () => {
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
                         <h2>Events</h2>
                         <div>
-                            <a href="category.html" className="more">See All Events</a>
+                            <a href="/" className="more">See All Events</a>
                         </div>
                     </div>
                     <div className="row">
