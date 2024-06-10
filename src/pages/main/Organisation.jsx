@@ -37,7 +37,7 @@ const Leadership = () => {
             	<div className="col-lg-12 grid-margin stretch-card">
               		<div className="card">
 						<div className="card-body">
-							<h4 className="card-title">ORGANISATION</h4>
+							<h4 className="card-title">LEADERSHIP</h4>
 							<div className="table-responsive">
 								<table className="table table-striped">
 									<thead>
@@ -46,7 +46,7 @@ const Leadership = () => {
 												Name
 											</th>
 											<th>
-												Description
+												Level
 											</th>
 											<th>
 												Status
@@ -61,7 +61,7 @@ const Leadership = () => {
 														{record.name}
 													</td>
 													<td>
-														{record.description}
+														{record.level}
 													</td>
 													<td>
 														{record.status}

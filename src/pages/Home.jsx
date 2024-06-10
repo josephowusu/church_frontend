@@ -103,7 +103,7 @@ const Home = () => {
                         </div>
                         <div className="col-lg-3">
                             <div className="trending">
-                                <h3>Department(s)</h3>
+                                <h3>Ministry</h3>
                                 <ul className="trending-post">
                                     {department && department.length > 0 ? department.map((item, index) => (
                                         <li key={index}>
@@ -129,7 +129,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-9 order-md-2">
+                        <div className="col-md-12 order-md-2">
                             {/* <div className="d-lg-flex post-entry-2">
                                 <a href="single-post.html" className="me-4 thumbnail d-inline-block mb-4 mb-lg-0">
                                     <img src="assets/img/post-landscape-3.jpg" alt="" className="img-fluid" />
@@ -152,7 +152,23 @@ const Home = () => {
                     </div> */}
 
                     <div className="row">
-                        <div className="col-lg-4">
+                        <div className="col-md-4">
+                            {Object.keys(eventsByMember).map(date => (
+                                <div key={date}>
+                                    {events[date].map((event, index) => (
+                                        <div className="post-entry-1 border-bottom" key={index}>
+                                            <div className="post-meta">
+                                                <span className="date">Event</span> <span className="mx-1">&bullet;</span> <span>{new Date(event.createdAt).toLocaleDateString()}</span>
+                                            </div>
+                                            <h2 className="mb-2"><a href="#" onClick={(e) => {e.preventDefault();goToPost(event.id)}}>{event.title}</a></h2>
+                                            <span className="author mb-3 d-block">{event.author}</span>
+                                            <p>{shortenText(event.description, 200)}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="col-md-8">
                             {Object.keys(eventsByChurch).map((date, index) => (
                                 <div key={index}>
                                     {events[date].map((event, index) => (
@@ -169,18 +185,18 @@ const Home = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="col-lg-8">
-                            {/* <div className="post-entry-1">
+                        {/* <div className="col-lg-8">
+                            <div className="post-entry-1">
                                 <a href="single-post.html"><img src="assets/img/post-landscape-7.jpg" alt="" className="img-fluid" /></a>
                                 <div className="post-meta"><span className="date">Business</span> <span className="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
                                 <h2 className="mb-2"><a href="single-post.html">How to Avoid Distraction and Stay Focused During Video Calls?</a></h2>
                                 <span className="author mb-3 d-block">Jenny Wilson</span>
                                 <p className="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae, inventore pariatur numquam cumque possimus</p>
-                            </div> */}
-                        </div>
-                        </div>
-                        </div>
-                        <div className="col-md-3">
+                            </div>
+                        </div> */}
+                    </div>
+                </div>
+                        {/* <div className="col-md-3">
                             {Object.keys(eventsByMember).map(date => (
                                 <div key={date}>
                                     {events[date].map((event, index) => (
@@ -195,7 +211,7 @@ const Home = () => {
                                     ))}
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>

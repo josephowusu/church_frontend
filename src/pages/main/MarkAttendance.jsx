@@ -38,7 +38,7 @@ const MarkAttendance = () => {
             	<div className="col-lg-12 grid-margin stretch-card">
               		<div className="card">
 						<div className="card-body">
-							<h4 className="card-title">Attendance</h4>
+							<h4 className="card-title">ATTENDANCE</h4>
 							<div className="table-responsive">
 								<table className="table table-striped">
 									<thead>
