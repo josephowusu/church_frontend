@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
-const Organisation = () => {
+const Leadership = () => {
 	const [records, setRecords] = useState([])
 
 	const formData = {
@@ -80,4 +80,4 @@ const Organisation = () => {
     );
 }
 
-export default Organisation;
+export default Leadership;

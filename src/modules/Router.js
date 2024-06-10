@@ -1,42 +1,4 @@
 export const Router = {
-    // Members: {
-    //     title: 'Members',
-    //     subPages: [
-    //         {
-    //             name: 'memberTable',
-    //             title: 'Members Table',
-    //             href: '/member-table',
-    //             icon: '',
-    //             subPages: []
-    //         },
-    //         {
-    //             name: 'memberRegister',
-    //             title: 'Register Members',
-    //             href: '/register-member-form',
-    //             icon: '',
-    //             subPages: []
-    //         }
-    //     ]
-    // },
-    Attendance: {
-        title: 'Attendance',
-        subPages: [
-            {
-                name: 'markAttendance',
-                title: 'Mark Attendance', 
-                href: '/mark_attendance',
-                icon: '',
-                subPages: []
-            },
-            {
-                name: 'viewAttendance',
-                title: 'View Attendance', 
-                href: '/view_attendance',
-                icon: '',
-                subPages: []
-            }
-        ]
-    },
     TitesAndOfferings: {
         title: 'Tithes & Offerings',
         subPages: [
@@ -80,6 +42,25 @@ export const Router = {
                 icon: '',
                 subPages: []
             }
+        ]
+    },
+    Administrator: {
+        title: 'Administrator',
+        subPages: [
+            {
+                name: 'branches',
+                title: 'Branches', 
+                href: '/branches',
+                icon: '',
+                subPages: []
+            },
+            {
+                name: 'assignAdminRole',
+                title: 'Assign Admin Role', 
+                href: '/assignAdminRole',
+                icon: '',
+                subPages: []
+            },
         ]
     }
 }

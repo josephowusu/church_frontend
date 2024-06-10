@@ -55,26 +55,31 @@ const MainNavComponent = () => {
                         <a className="nav-link" onClick={() => navigate('/dashboard')}>
                             <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
                             <span className="menu-title">Dashboard</span>
-                            {/* <div className="badge badge-info badge-pill">2</div> */}
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={() => navigate('/leadership')}>
+                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Leadership</span>
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={() => navigate('/mark_attendance')}>
+                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Mark Attendance</span>
                         </a>
                     </li>
                     {renderNavigation()}
                     <li className="nav-item">
-                        <a className="nav-link" onClick={() => navigate('/department')}>
+                        <a className="nav-link" onClick={() => navigate('/ministry')}>
                             <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span className="menu-title">Departments</span>
+                            <span className="menu-title">Ministry</span>
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" onClick={() => navigate('/calendar_event')}>
                             <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
                             <span className="menu-title">Calendar & Events</span>
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" onClick={() => navigate('/organisation')}>
-                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span className="menu-title">Organisation</span>
                         </a>
                     </li>
                 </ul>

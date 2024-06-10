@@ -50,8 +50,8 @@ function CustomFormComponent({formData}) {
             console.log('endPoint missing')
             return
         }
-        const sessionData = fetchData('sessionData')
-        SocketIO.emit(formData.endPoint, {sessionID: sessionData ? sessionData.token : null, hiddenID: formData.hiddenID ? formData.hiddenID : null, ...formValues}, (response) => {
+        const sessionData = fetchData('userData')
+        SocketIO.emit(formData.endPoint, {sessionID: sessionData ? sessionData[0].id : 0, hiddenID: formData.hiddenID ? formData.hiddenID : null, ...formValues, branchID: sessionData ? sessionData[0].branchID : 0}, (response) => {
             setIsLoading(false)
             handleAlert(response.message, response.status)
         })

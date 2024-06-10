@@ -10,8 +10,7 @@ const Offerings = () => {
 		id: generateIdentifier(),
 		endPoint: '/insert-offerings',
 		formData: [
-			{ label: 'Member', type: 'fetchList', name: 'memberID', required: true, fetchEndPoint: '/fetch-members', display: ['firstName', 'otherName', 'lastName'], colSize: 8 },
-			{ label: 'Amount', type: 'number', name: 'amount', colSize: 4 }
+			{ label: 'Amount', type: 'number', name: 'amount', colSize: 12 }
 		]
 	}
 
