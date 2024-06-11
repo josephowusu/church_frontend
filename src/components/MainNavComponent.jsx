@@ -82,6 +82,12 @@ const MainNavComponent = () => {
                             <span className="menu-title">Calendar & Events</span>
                         </a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" onClick={() => navigate('/branches')}>
+                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Branches</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </>

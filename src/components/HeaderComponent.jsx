@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchData } from '../modules/helper';
 
 const HeaderComponent = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const menuClicked = () => {
         mobileNavToogle();
@@ -9,6 +11,19 @@ const HeaderComponent = () => {
     function mobileNavToogle() {
         document.querySelector('body').classList.toggle('mobile-nav-active')
     }
+
+    const checker = () => {
+        const sessionData = fetchData('userData')
+        if (sessionData) {
+            setLoggedIn(true)
+        } else {
+            setLoggedIn(false)
+        }
+    }
+
+    useEffect(() => {
+        checker()
+    }, [])
 
     return (
         <>
@@ -21,7 +36,7 @@ const HeaderComponent = () => {
                     <nav id="navbar" className="navbar">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li><a href="/user_login">Login</a></li>
+                            {loggedIn ? (<li><a href="/dashboard">Dashboard</a></li>) : (<li><a href="/user_login">Login</a></li>)}
                             <li><a href="/contact_us">Contact</a></li>
                         </ul>
                     </nav>

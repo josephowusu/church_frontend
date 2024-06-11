@@ -43,24 +43,5 @@ export const Router = {
                 subPages: []
             }
         ]
-    },
-    Administrator: {
-        title: 'Administrator',
-        subPages: [
-            {
-                name: 'branches',
-                title: 'Branches', 
-                href: '/branches',
-                icon: '',
-                subPages: []
-            },
-            {
-                name: 'assignAdminRole',
-                title: 'Assign Admin Role', 
-                href: '/assignAdminRole',
-                icon: '',
-                subPages: []
-            },
-        ]
     }
 }

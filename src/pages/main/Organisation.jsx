@@ -7,16 +7,17 @@ const Leadership = () => {
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/insert-update-organisation',
+		endPoint: '/insert-update-leadership',
 		formData: [
-			{ label: 'Name', type: 'text', name: 'name', colSize: 4 },
-			{ label: 'Description', type: 'text', name: 'description', colSize: 8 },
+			{ label: 'Member', type: 'fetchList', name: 'userID', required: true, fetchEndPoint: '/fetch-members', display: ['firstName', 'otherName', 'lastName'], colSize: 4 },
+			{ label: 'Role', type: 'text', name: 'role', colSize: 4 },
+			{ label: 'Level', type: 'fetchList', name: 'level', required: true, fetchEndPoint: '/fetch-level', display: ['level'], colSize: 4 },
 		]
 	}
 
 	const fetchRecords = () => {
-		const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-organisation', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
+		const sessionData = fetchData('userData')
+		SocketIO.emit('/fetch-leadership', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0,  branchID: sessionData ? sessionData[0].branchID : 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}
@@ -25,7 +26,7 @@ const Leadership = () => {
 
 	useEffect(()=> {
 		fetchRecords()
-		SocketIO.on('/organisation/broadcast', () => {
+		SocketIO.on('/leadership/broadcast', () => {
 			fetchRecords()
 		})
 	}, [])
@@ -46,7 +47,7 @@ const Leadership = () => {
 												Name
 											</th>
 											<th>
-												Level
+												Role
 											</th>
 											<th>
 												Status
@@ -54,14 +55,14 @@ const Leadership = () => {
 										</tr>
                       				</thead>
                       				<tbody>
-									  {records && records.length > 0 ? records.map((record) => {
+									  {records && records.length > 0 ? records.map((record, index) => {
 											return (
-												<tr>
+												<tr key={index}>
 													<td>
-														{record.name}
+														{record.firstName ? record.firstName : ''} {record.otherName ? record.otherName : '' } {record.lastName ? record.lastName : ''}
 													</td>
 													<td>
-														{record.level}
+														{record.role}
 													</td>
 													<td>
 														{record.status}

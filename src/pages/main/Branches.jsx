@@ -9,14 +9,15 @@ const Branches = () => {
 		id: generateIdentifier(),
 		endPoint: '/add-branch',
 		formData: [
-			{ label: 'Name', type: 'text', name: 'name', colSize: 4 },
-			{ label: 'Description', type: 'text', name: 'description', colSize: 8 },
+			{ label: 'Name', type: 'text', name: 'name', colSize: 8 },
+			{ label: 'Level', type: 'fetchList', name: 'level', required: true, fetchEndPoint: '/fetch-level', display: ['level'], colSize: 4 },
+			{ label: 'Description', type: 'text', name: 'description', colSize: 12 },
 		]
 	}
 
     const fetchRecords = () => {
-		const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-branch', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
+		const sessionData = fetchData('userData')
+		SocketIO.emit('/fetch-branch', { sessionID: sessionData ? sessionData.token : null,  branchID: sessionData ? sessionData[0].branchID : 0, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}
@@ -54,9 +55,9 @@ const Branches = () => {
 										</tr>
                       				</thead>
                       				<tbody>
-										{records && records.length > 0 ? records.map((record) => {
+										{records && records.length > 0 ? records.map((record, index) => {
 											return (
-												<tr>
+												<tr key={index}>
 													<td>
 														{record.name}
 													</td>

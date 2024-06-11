@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { SocketIO, fetchData, generateIdentifier, shortenText } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
+import { useNavigate } from 'react-router-dom';
 
 const CalenderAndEvent = () => {
 	const [records, setRecords] = useState([])
+	const navigate = useNavigate()
 
 	const formData = {
 		id: generateIdentifier(),
@@ -17,13 +19,17 @@ const CalenderAndEvent = () => {
 	}
 
 	const fetchRecords = () => {
-		const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-event', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0 }, (response) => {
+		const sessionData = fetchData('userData')
+		SocketIO.emit('/fetch-event', { sessionID: sessionData ? sessionData.token : null,  branchID: sessionData ? sessionData[0].branchID : 0, limit: 10, offset: 0 }, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}
 		})
 	}
+
+	const goToPost = (postId) => {
+        navigate(`/post/${postId}`);
+    }
 
 	useEffect(()=> {
 		fetchRecords()
@@ -72,7 +78,7 @@ const CalenderAndEvent = () => {
 														{record.location}
 													</td>
 													<td>
-														DETAILS
+														<span style={{cursor: 'pointer'}} onClick={()=>goToPost(record.id)}>DETAILS</span>
 													</td>
 												</tr>
 											)

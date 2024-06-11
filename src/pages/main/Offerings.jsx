@@ -15,8 +15,8 @@ const Offerings = () => {
 	}
 
 	const fetchRecords = () => {
-		const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-offerings', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
+		const sessionData = fetchData('userData')
+		SocketIO.emit('/fetch-offerings', { sessionID: sessionData ? sessionData.token : null, branchID: sessionData ? sessionData[0].branchID : 0, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}

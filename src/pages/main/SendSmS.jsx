@@ -15,7 +15,7 @@ const SendSmS = () => {
 	}
 
 	const fetchRecords = () => {
-		const sessionData = fetchData('sessionData')
+		const sessionData = fetchData('userData')
 		console.log(sessionData)
 		SocketIO.emit('/fetch-dues', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {

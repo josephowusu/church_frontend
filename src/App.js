@@ -23,6 +23,7 @@ import MarkAttendance from './pages/main/MarkAttendance';
 import Branches from './pages/main/Branches';
 
 function App() {
+
 	return (
 		<Router>
 			<Routes>

@@ -5,9 +5,14 @@ import { deleteData, fetchData, getFormattedDate } from '../modules/helper';
 import { useNavigate } from 'react-router-dom';
 // import './mainApp/css/style.css'
 
-const MainHeaderComponent = () => {
+const MainHeaderComponent = ({ searchValue, onSearch }) => {
     const [name, setName] = useState('')
     const navigate = useNavigate()
+
+    const handleChange = (event) => {
+        event.preventDefault()
+        onSearch(event.target.value)
+    }
 
     const GetData = async () => {
         const data = await fetchData('userData')
@@ -52,7 +57,7 @@ const MainHeaderComponent = () => {
                     <ul className="navbar-nav mr-lg-2">
                         <li className="nav-item nav-search d-none d-lg-block">
                             <div className="input-group">
-                                <input type="text" className="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search" />
+                                <input type="text" className="form-control" value={searchValue} placeholder="Search Here..." aria-label="search" aria-describedby="search" onChange={handleChange} />
                             </div>
                         </li>
                     </ul>

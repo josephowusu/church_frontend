@@ -9,15 +9,15 @@ const SendEmail = () => {
 		id: generateIdentifier(),
 		endPoint: '/send-email',
 		formData: [
-			{ label: 'Department', type: 'fetchList', name: 'departmentID', fetchEndPoint: '/fetch-department', display: ['name'], colSize: 4 },
+			{ label: 'Branches', type: 'fetchList', name: 'selectedBranchID', fetchEndPoint: '/fetch-branches', display: ['name'], colSize: 4 },
 			{ label: 'Subject', type: 'text', name: 'subject', colSize: 8 },
 			{ label: 'Message', type: 'textarea', name: 'message', colSize: 12 },
 		]
 	}
 
 	const fetchRecords = () => {
-		const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-email', { sessionID: sessionData ? sessionData.token : null, limit: 100, offset: 0}, (response) => {
+		const sessionData = fetchData('userData')
+		SocketIO.emit('/fetch-email', { sessionID: sessionData ? sessionData.token : null, limit: 100, offset: 0, branchID: sessionData ? sessionData[0].branchID : 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}

@@ -60,8 +60,8 @@ function CustomFormComponent({formData}) {
 
     const fetchOptions = async (field) => {
         try {
-            const sessionData = fetchData('sessionData')
-            SocketIO.emit(field.fetchEndPoint, { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
+            const sessionData = fetchData('userData')
+            SocketIO.emit(field.fetchEndPoint, { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0, branchID: sessionData ? sessionData[0].branchID : 0}, (response) => {
                 if (response.status === 'success') {
                     const transformedOptions = response.data.map(option => ({
                         label: field.display.map((item) => item !== null ? option[item] : '').join(' '),
