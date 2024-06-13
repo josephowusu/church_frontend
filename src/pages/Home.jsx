@@ -20,7 +20,7 @@ const Home = () => {
 
     const fetchOrganisation = () => {
         const sessionData = fetchData('sessionData')
-		SocketIO.emit('/fetch-organisation', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-leadership', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setOrganisations(response.data)
 			}
@@ -41,7 +41,7 @@ const Home = () => {
     const fetchDepartment = () => {
         const sessionData = fetchData('sessionData')
 		SocketIO.emit('/fetch-department', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
-			if (response.status === 'success') {
+            if (response.status === 'success') {
 				setDepartment(response.data)
 			}
 		})
@@ -95,10 +95,10 @@ const Home = () => {
                                             <div className="post-meta">
                                                 <span>{fullDate(organisation.createdAt)}</span>
                                             </div>
-                                            <h2><a href={organisation.link}>{organisation.name}</a></h2>
+                                            <h2><a href={organisation.link}>{organisation.firstName} {organisation.lastName}</a></h2>
                                         </div>
                                     </div>
-                                )) : 'No organisations added..'}
+                                )) : (<p style={{paddingLeft: 20}}>No Leadership has been added..</p>)}
                             </div>
                         </div>
                         <div className="col-lg-3">
@@ -113,7 +113,7 @@ const Home = () => {
                                             <span className="author">{shortenText(item.description, 100)}</span>
                                             </a>
                                         </li>
-                                    )) : 'No department submitted..'}
+                                    )) : (<p style={{paddingLeft: 20}}>No Ministry submitted..</p>)}
                                 </ul>
                             </div>
                         </div>

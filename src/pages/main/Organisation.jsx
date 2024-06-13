@@ -50,6 +50,9 @@ const Leadership = () => {
 												Role
 											</th>
 											<th>
+												Level
+											</th>
+											<th>
 												Status
 											</th>
 										</tr>
@@ -63,6 +66,9 @@ const Leadership = () => {
 													</td>
 													<td>
 														{record.role}
+													</td>
+													<td>
+														{record.level == 1 ? 'HeadOffice' : record.level == 2 ? 'District / Area' : record.level == 3 ? 'Branch' : 'Unset'}
 													</td>
 													<td>
 														{record.status}

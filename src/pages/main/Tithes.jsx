@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import CustomModal from '../../components/customModal';
 
 const Tithes = () => {
 	const [records, setRecords] = useState({})
+	const location = useLocation();
+	const navigate = useNavigate();
+	const [isModalOpen, setIsModalOpen] = useState(false)
+	let total = 0
+	const [modalData, setModalData] = useState([])
+	const handleCloseModal = () => {
+		setIsModalOpen(!isModalOpen)
+	}
+	// const isModalOpen = new URLSearchParams(location.search).get('modal') === 'true';
 
 	const formData = {
 		id: generateIdentifier(),
@@ -13,6 +24,10 @@ const Tithes = () => {
 			{ label: 'Amount', type: 'number', name: 'amount', colSize: 4 }
 		]
 	}
+	
+	useEffect(() => {
+		console.log("modal data tithes: ", modalData)
+	}, [isModalOpen]) 
 
 	const fetchRecords = () => {
 		const sessionData = fetchData('userData')
@@ -67,7 +82,7 @@ const Tithes = () => {
 													<td>
 														GHS{totalAmount}
 													</td>
-													<td>
+													<td style={{cursor:'pointer'} } onClick={()=>{setModalData(transactions);setIsModalOpen(true)}} >
 														DETAILS
 													</td>
 												</tr>
@@ -80,6 +95,54 @@ const Tithes = () => {
 					</div>
 				</div>
           </div>
+		  <CustomModal 
+        show={isModalOpen} 
+        handleClose={handleCloseModal} 
+		title={'OFFERINGS'}
+      >
+	{/* <h4 className="card-title">OFFERINGS</h4> */}
+							<div className="table-responsive">
+								<table className="table table-striped">
+									<thead>
+										<tr>
+											<th>
+												MEMBER
+											</th>
+											<th>
+												AMOUNT
+											</th>
+											<th>
+												BRANCH
+											</th>
+										</tr>
+                      				</thead>
+                      				<tbody>
+									  {modalData && modalData.length > 0 ? modalData.map((transaction, index) => {
+										total += Number(transaction.amount || 0)
+										return (
+											<tr key={index}>
+												<td>
+													{transaction.firstName || ''} {transaction.otherName || ''} {transaction.lastName || ''}
+												</td>
+												<td>
+													GHS{transaction.amount}
+												</td>
+												<td>
+													{transaction.name}
+												</td>
+											</tr>
+										)
+										}) : null}
+                      				</tbody>
+									  <tfoot>
+            <th>TOTAL: </th>
+            <th>GHS{total}</th>
+          </tfoot>
+								</table>
+							{/* </div>
+						</div> */}
+					
+					</div>      </CustomModal>
         </>
     );
 }

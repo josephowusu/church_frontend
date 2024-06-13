@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import CustomModal from '../../components/customModal';
 
 const Dues = () => {
 	const [records, setRecords] = useState({})
+	const location = useLocation();
+	const navigate = useNavigate();
+	const [modalOpen,setModalOpen] = useState(false)
+	const {id}=useParams()
+	const handleCloseModal = () => {
+		setModalOpen(!modalOpen)
+	};
+	let total = 0
+	const [modalData, setModalData] = useState([])
 
 	const formData = {
 		id: generateIdentifier(),
@@ -13,6 +24,10 @@ const Dues = () => {
 			{ label: 'Amount', type: 'number', name: 'amount', colSize: 4 }
 		]
 	}
+
+	useEffect(() => {
+		console.log("modal data: ", modalData)
+	}, [modalOpen])
 
 	const fetchRecords = () => {
 		const sessionData = fetchData('userData')
@@ -68,7 +83,7 @@ const Dues = () => {
 													<td>
 														GHS{totalAmount}
 													</td>
-													<td>
+													<td style={{cursor:'pointer'} } onClick={()=>{setModalData(transactions);setModalOpen(true)}} >
 														DETAILS
 													</td>
 												</tr>
@@ -81,6 +96,54 @@ const Dues = () => {
 					</div>
 				</div>
           </div>
+		  <CustomModal 
+        show={modalOpen} 
+        handleClose={handleCloseModal} 
+		title={'OFFERINGS'}
+      >
+	{/* <h4 className="card-title">OFFERINGS</h4> */}
+							<div className="table-responsive">
+								<table className="table table-striped">
+									<thead>
+										<tr>
+											<th>
+												MEMBER
+											</th>
+											<th>
+												AMOUNT
+											</th>
+											<th>
+												BRANCH
+											</th>
+										</tr>
+                      				</thead>
+                      				<tbody>
+									  {modalData && modalData.length > 0 ? modalData.map((transaction, index) => {
+										total += Number(transaction.amount || 0)
+										return (
+											<tr key={index}>
+												<td>
+													{transaction.firstName || ''} {transaction.otherName || ''} {transaction.lastName || ''}
+												</td>
+												<td>
+													GHS{transaction.amount}
+												</td>
+												<td>
+													{transaction.name}
+												</td>
+											</tr>
+										)
+										}) : null}
+                      				</tbody>
+									  <tfoot>
+            <th>TOTAL: </th>
+            <th>GHS{total}</th>
+          </tfoot>
+								</table>
+							{/* </div>
+						</div> */}
+					
+					</div>      </CustomModal>
         </>
     );
 }

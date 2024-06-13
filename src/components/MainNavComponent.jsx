@@ -33,8 +33,8 @@ const MainNavComponent = () => {
                     aria-expanded={expandedMenu === index ? "true" : "false"}
                     aria-controls={`sub-menu-${index}`}
                 >
-                    <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                    <span className="menu-title">{category.title}</span>
+                    <i class={category.icon} aria-hidden="true"></i>
+                    <span className="menu-title" >{category.title}</span>
                     <i className="fa fa-caret-down" aria-hidden="true" style={{marginLeft: 10}}></i>
                 </p>
                 <div className={`collapse ${expandedMenu === index ? "show" : ""}`} id={`sub-menu-${index}`}>
@@ -50,7 +50,7 @@ const MainNavComponent = () => {
     return (
         <>
             <nav className="sidebar sidebar-offcanvas" id="sidebar">
-                <ul className="nav">
+                <ul className="nav"  style={{cursor: 'pointer'}}>
                     <li className="nav-item">
                         <a className="nav-link" onClick={() => navigate('/dashboard')}>
                             <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
@@ -59,33 +59,34 @@ const MainNavComponent = () => {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" onClick={() => navigate('/leadership')}>
-                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span className="menu-title">Leadership</span>
+                        <i class="fa-solid fa-person-shelter fa-lg menu-icon" aria-hidden="true"></i>
+                        <span className="menu-title">Leadership</span>
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" onClick={() => navigate('/mark_attendance')}>
-                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span className="menu-title">Mark Attendance</span>
+                            <i class="fa-solid fa-people-roof fa-lg menu-icon" aria-hidden="true"></i>
+                            <span className="menu-title">Attendance</span>
                         </a>
                     </li>
                     {renderNavigation()}
                     <li className="nav-item">
                         <a className="nav-link" onClick={() => navigate('/ministry')}>
-                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
+                            <i class="fa-solid fa-users-viewfinder fa-lg menu-icon" aria-hidden="true"></i>
                             <span className="menu-title">Ministry</span>
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" onClick={() => navigate('/calendar_event')}>
-                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span className="menu-title">Calendar & Events</span>
+                        <i class="fa fa-calendar fa-lg menu-icon" aria-hidden="true"></i>
+                            {/* <i className="fa fa-th-large menu-icon" aria-hidden="true"></i> */}
+                            <span className="menu-title">Events</span>
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" onClick={() => navigate('/branches')}>
-                            <i className="fa fa-th-large menu-icon" aria-hidden="true"></i>
-                            <span className="menu-title">Branches</span>
+                        <i class="fa-solid fa-arrows-split-up-and-left fa-lg menu-icon" aria-hidden="true"></i>
+                        <span className="menu-title">Branches</span>
                         </a>
                     </li>
                 </ul>

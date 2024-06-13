@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { SocketIO, fetchData, fullDate, generateIdentifier } from '../../modules/helper';
+import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 
-const SendSmS = () => {
-	const [records, setRecords] = useState([])
+const Dues = () => {
+	const [records, setRecords] = useState({})
 
 	const formData = {
 		id: generateIdentifier(),
-		endPoint: '/send-sms',
+		endPoint: '/insert-member',
 		formData: [
-			{ label: 'Department', type: 'fetchList', name: 'departmentID', fetchEndPoint: '/fetch-department', display: ['name'], colSize: 4 },
-			{ label: 'Message', type: 'text', name: 'message', colSize: 8 }
-
+			{ label: 'Member', type: 'fetchList', name: 'memberID', required: true, fetchEndPoint: '/fetch-members', display: ['firstName', 'otherName', 'lastName'], colSize: 8 },
+			{ label: 'Amount', type: 'number', name: 'amount', colSize: 4 }
 		]
 	}
 
 	const fetchRecords = () => {
 		const sessionData = fetchData('userData')
-		console.log(sessionData)
-		SocketIO.emit('/fetch-dues', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-member', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0, branchID: sessionData ? sessionData[0].branchID : 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 				console.log(response.data)
@@ -28,7 +26,7 @@ const SendSmS = () => {
 
 	useEffect(()=> {
 		fetchRecords()
-		SocketIO.on('/dues/broadcast', () => {
+		SocketIO.on('/member/broadcast', () => {
 			fetchRecords()
 		})
 	}, [])
@@ -40,38 +38,36 @@ const SendSmS = () => {
             	<div className="col-lg-12 grid-margin stretch-card">
               		<div className="card">
 						<div className="card-body">
-							<h4 className="card-title">SEND SMS</h4>
+							<h4 className="card-title">MEMBERS</h4>
 							<div className="table-responsive">
 								<table className="table table-striped">
 									<thead>
 										<tr>
-										<th>
-												DATE
+											<th>
+												NAME
 											</th>
 											<th>
-												MESSAGE
+												DOB
 											</th>
 											<th>
-												STATUS
+												PHONE
+											</th>
+											<th>
+												BRANCH
 											</th>
 										</tr>
                       				</thead>
                       				<tbody>
-									  {records && records.length > 0 ? records.map((record) => {
+									  	{records && records.length > 0 ? records.map((record, index) => {
 											return (
-												<tr>
+												<tr key={index}>
+													
 													<td>
-													{fullDate(record.createdAt)}
-													</td>
-													<td>
-														{record.message}
-													</td>
-													<td>
-														{record.status}
+														DETAILS
 													</td>
 												</tr>
 											)
-										}) : null}
+										}) : ''}
                       				</tbody>
 								</table>
 							</div>
@@ -83,4 +79,4 @@ const SendSmS = () => {
     );
 }
 
-export default SendSmS;
+export default Dues;

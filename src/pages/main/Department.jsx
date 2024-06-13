@@ -16,7 +16,7 @@ const Department = () => {
 
 	const fetchRecords = () => {
 		const sessionData = fetchData('userData')
-		SocketIO.emit('/fetch-department', { sessionID: sessionData ? sessionData.token : null,  branchID: sessionData ? sessionData[0].branchID : 0, limit: 10, offset: 0}, (response) => {
+		SocketIO.emit('/fetch-department-min', { sessionID: sessionData ? sessionData.token : null,  branchID: sessionData ? sessionData[0].branchID : 0, limit: 10, offset: 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
 			}

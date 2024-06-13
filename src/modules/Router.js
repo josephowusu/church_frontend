@@ -1,6 +1,7 @@
 export const Router = {
     TitesAndOfferings: {
         title: 'Tithes & Offerings',
+        icon:'fa-solid fa-money-bills fa-lg menu-icon',
         subPages: [
             {
                 name: 'dues',
@@ -27,6 +28,7 @@ export const Router = {
     },
     Message: {
         title: 'Messages',
+        icon:'fa-brands fa-signal-messenger fa-lg menu-icon',
         subPages: [
             {
                 name: 'sms',

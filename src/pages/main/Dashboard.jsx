@@ -9,7 +9,8 @@ const Dashboard = () => {
 		SocketIO.emit('/fetch-members-details', { sessionID: sessionData ? sessionData.token : null, limit: 10, offset: 0, branchID: sessionData ? sessionData[0].branchID : 0}, (response) => {
 			if (response.status === 'success') {
 				setRecords(response.data)
-			}
+				}
+			console.log(response)
 		})
 	}
 
@@ -46,9 +47,7 @@ const Dashboard = () => {
 											<th>
 												TITHES
 											</th>
-											<th>
-												CHECK
-											</th>
+						
 										</tr>
 									</thead>
 								<tbody>
@@ -65,13 +64,10 @@ const Dashboard = () => {
 												{record.phone ? record.phone : ''}
 											</td>
 											<td>
-												40
+												{record.totalDues ? record.totalDues : '0.00'}
 											</td>
 											<td>
-												600
-											</td>
-											<td>
-												DETAILS
+												{record.totalTithes ? record.totalTithes : '0.00'}
 											</td>
 										</tr>
 									)
