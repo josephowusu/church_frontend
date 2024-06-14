@@ -36,7 +36,7 @@ const Dashboard = () => {
 												FULL NAME
 											</th>
 											<th>
-												ACCOUNT TYPE
+												BRANCH
 											</th>
 											<th>
 												PHONE
@@ -58,7 +58,7 @@ const Dashboard = () => {
 												{record.firstName} {record.otherName ? record.otherName : ''} {record.lastName}
 											</td>
 											<td>
-												{record.type}
+												{record.branchName}
 											</td>
 											<td>
 												{record.phone ? record.phone : ''}
