@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SocketIO, fetchData, generateIdentifier } from '../../modules/helper';
 import CustomFormComponent from '../../components/CustomFormComponent';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import CustomModal from '../../components/customModal';
+import { CSVLink } from 'react-csv';
+import { MdPrint, MdFileDownload } from 'react-icons/md';
 
 const Dues = () => {
 	const [records, setRecords] = useState({})
@@ -10,6 +12,8 @@ const Dues = () => {
 	const navigate = useNavigate();
 	const [modalOpen,setModalOpen] = useState(false)
 	const {id}=useParams()
+	const printRef = useRef(null);
+
 	const handleCloseModal = () => {
 		setModalOpen(!modalOpen)
 	};
@@ -45,6 +49,57 @@ const Dues = () => {
 			fetchRecords()
 		})
 	}, [])
+	const handlePrint = () => {
+        if (!printRef.current) {
+            console.error('Element not found.');
+            return;
+        }
+
+        const printContents = printRef.current.outerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload(); // Refresh page after printing
+    };
+
+    const handlePrints = () => {
+        const printContents = document.getElementById('modalContent').innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload(); // Refresh page after printing
+    };
+	const recordsHeaders = [
+		{ label: 'DATE', key: 'date' },
+		{ label: 'AMOUNT', key: 'amount' }
+	];
+
+	const recordsData = Object.entries(records).map(([createdAt, transactions]) => {
+		let totalAmount = 0;
+		transactions.map((transaction) => {
+			totalAmount += Number(transaction.amount);
+		});
+		return {
+			date: createdAt,
+			amount: `GHS${totalAmount}`
+		};
+	});
+
+	const modalHeaders = [
+		{ label: 'MEMBER', key: 'member' },
+		{ label: 'AMOUNT', key: 'amount' },
+		{ label: 'BRANCH', key: 'branch' }
+	];
+
+	const modalCsvData = modalData.map(transaction => ({
+		member: `${transaction.firstName || ''} ${transaction.otherName || ''} ${transaction.lastName || ''}`,
+		amount: `GHS${transaction.amount}`,
+		branch: transaction.name
+	}));
 	
     return (
         <>
@@ -54,7 +109,15 @@ const Dues = () => {
               		<div className="card">
 						<div className="card-body">
 							<h4 className="card-title">DUES</h4>
-							<div className="table-responsive">
+							<div className="mb-3">
+                                <button onClick={handlePrint} className="btn btn-primary mr-2">
+                                    <MdPrint style={{ marginRight: '5px' }} /> 
+                                </button>
+                                <CSVLink data={recordsData} headers={recordsHeaders} filename="dues_records.csv" className="btn btn-secondary">
+                                    <MdFileDownload style={{ marginRight: '5px' }} />
+                                </CSVLink>
+                            </div>
+							<div className="table-responsive"  ref={printRef} id="elementToPrint">
 								<table className="table table-striped">
 									<thead>
 										<tr>
@@ -101,8 +164,15 @@ const Dues = () => {
         handleClose={handleCloseModal} 
 		title={'OFFERINGS'}
       >
-	{/* <h4 className="card-title">OFFERINGS</h4> */}
-							<div className="table-responsive">
+                <div className="mb-3">
+                    <button onClick={handlePrints} className="btn btn-primary mr-2">
+                        <MdPrint style={{ marginRight: '5px' }} /> 
+                    </button>
+                    <CSVLink data={modalCsvData} headers={modalHeaders} filename="Dues_details.csv" className="btn btn-secondary">
+                        <MdFileDownload style={{ marginRight: '5px' }} />
+                    </CSVLink>
+                </div>
+							<div className="table-responsive" id="modalContent">
 								<table className="table table-striped">
 									<thead>
 										<tr>
