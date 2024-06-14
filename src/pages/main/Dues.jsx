@@ -162,7 +162,7 @@ const Dues = () => {
 		  <CustomModal 
         show={modalOpen} 
         handleClose={handleCloseModal} 
-		title={'OFFERINGS'}
+		title={'Dues'}
       >
                 <div className="mb-3">
                     <button onClick={handlePrints} className="btn btn-primary mr-2">

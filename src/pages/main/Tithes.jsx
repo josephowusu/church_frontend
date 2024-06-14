@@ -160,13 +160,13 @@ const Tithes = () => {
 		  <CustomModal 
         show={isModalOpen} 
         handleClose={handleCloseModal} 
-		title={'OFFERINGS'}
+		title={'Tithes'}
       >
  <div className="mb-3">
                     <button onClick={handlePrints} className="btn btn-primary mr-2">
                         <MdPrint style={{ marginRight: '5px' }} /> 
                     </button>
-                    <CSVLink data={modalCsvData} headers={modalHeaders} filename="offerings_details.csv" className="btn btn-secondary">
+                    <CSVLink data={modalCsvData} headers={modalHeaders} filename="Tithes_details.csv" className="btn btn-secondary">
                         <MdFileDownload style={{ marginRight: '5px' }} />
                     </CSVLink>
                 </div>								<div className="table-responsive" id="modalContent">
