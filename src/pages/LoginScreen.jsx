@@ -46,7 +46,7 @@ const LoginScreen = () => {
                             <form action="#" method="post" role="form" className="php-email-form">
                                 <div className="row">
                                     <div className="form-group col-md-12">
-                                        <input type="text" name="username" className="form-control" id="email" placeholder="Email / Phone" onChange={(e)=> setEmail(e.target.value)} required />
+                                        <input type="text" name="username" className="form-control" id="email" placeholder="Email" onChange={(e)=> setEmail(e.target.value)} required />
                                     </div>
                                     <div className="form-group col-md-12">
                                         <input type="password" className="form-control" name="password" id="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)} required />
